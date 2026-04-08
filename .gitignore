@@ -1,0 +1,59 @@
+# ---------------------------
+# MANIM / MANIM-SLIDES
+# ---------------------------
+
+# Manim cache and rendered media
+media/
+manim_slides/
+Tex/
+texts/
+slides/files/
+videos/
+*assets/
+build/
+build/*
+
+# Ignore json + video output everywhere
+*.json
+*.mp4
+*.avi
+*.mov
+*.gif
+*.tex
+
+# Ignore temporary files and logs
+*.log
+*.aux
+*.out
+*.toc
+*.dvi
+*.html
+*.txt 
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# VSCode / Editor configs (optional)
+.vscode/
+.idea/
+
+# OS-specific junk
+.DS_Store
+Thumbs.db
+
+# Backup files
+*~
+*.swp
+
+# ---------------------------
+# PROJECT STRUCTURE POLICY
+# ---------------------------
+# Keep:
+#   /slides/*.py
+#   /figures/* (images, PNG, SVG, PDF)
+#   /README.md
+# Ignore:
+#   Generated videos, caches, JSON configs, logs
+#

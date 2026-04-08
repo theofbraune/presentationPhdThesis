@@ -1,0 +1,3 @@
+# .manim-slides.toml
+[slides]
+folder = "./build/slides_data"
