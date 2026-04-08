@@ -8,10 +8,10 @@ from slides.introThesis import Intro
 from slides.slideGoal import GoalSlide
 from slides.scalarDECcover import ScalarDEC_cover
 from slides.scalarValuedDEC import ScalarValuedDEC
-# from slides.slide3 import slide3
-# from slides.slide4 import slide4
-# from slides.slide5 import slide5
-# from slides.slide6 import slide6
+from slides.slide3 import slide3
+from slides.slide4 import slide4
+from slides.slide5 import slide5
+from slides.slide6 import slide6
 # from slides.stokes import stokes 
 # from slides.slide7 import slide7
 # from slides.slide8 import slide8
@@ -44,10 +44,10 @@ class FullPresentation(ThreeDSlide):
         GoalSlide,
         ScalarDEC_cover,
         ScalarValuedDEC,
-        # slide3,
-        # slide4,
-        # slide5,
-        # slide6,
+        slide3,
+        slide4,
+        slide5,
+        slide6,
         # stokes,
         # slide7,
         # slide8,
