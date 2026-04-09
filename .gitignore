@@ -27,7 +27,7 @@ build/*
 *.out
 *.toc
 *.dvi
-*.html
+# *.html
 *.txt 
 
 # Python cache

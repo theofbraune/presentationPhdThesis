@@ -13,8 +13,9 @@ from slides.slide4 import slide4
 from slides.slide5 import slide5
 from slides.slide6 import slide6
 # from slides.stokes import stokes 
-# from slides.slide7 import slide7
-# from slides.slide8 import slide8
+from slides.slide7 import slide7
+from slides.slide8 import slide8
+from slides.extDerSlide import ExteriorDerivativeSlides
 # from slides.teaserBundleValued import teaser_bundle_valued
 # from slides.slide9 import slide9
 # from slides.slide_connection import slide_connection
@@ -48,14 +49,9 @@ class FullPresentation(ThreeDSlide):
         slide4,
         slide5,
         slide6,
-        # stokes,
-        # slide7,
-        # slide8,
-        # teaser_bundle_valued,
-        # slide9,
-        # slide_connection,
-        # slide10,
-        # ExteriorDerivativeSlides,
+        slide7,
+        slide8,
+        ExteriorDerivativeSlides,
         # slide12,
         # TransitionBundleValued,
         # slide13,

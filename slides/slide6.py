@@ -154,7 +154,7 @@ class slide6(Slide):
             # nudge slightly outward from the face center
             face_center = central_face.get_center()
             outward = (mid - face_center)
-            outward = outward / (np.linalg.norm(outward) + 1e-6) * 0.35
+            outward = outward / (np.linalg.norm(outward) + 1e-6) * 0.4
             label.shift(outward)
             edge_labels.add(label)
 
