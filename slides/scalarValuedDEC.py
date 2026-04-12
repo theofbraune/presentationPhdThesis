@@ -136,17 +136,17 @@ class ScalarValuedDEC(Slide):
         self.remove(d1)
         self.wait()
         self.next_slide()
-        text_work=Tex(
-            'For this particular curve it holds $W(\gamma) = -6.87958..$', font_size=30
-        ).next_to(formula_work,0.8*DOWN).scale(0.8)
-        self.next_slide()
-        self.play(FadeIn(text_work))
-        self.next_slide()
-        self.play(FadeOut(text_work))
-        self.wait()
-        self.next_slide()       
+        # text_work=Tex(
+        #     'For this particular curve it holds $W(\gamma) = -6.87958..$', font_size=30
+        # ).next_to(formula_work,0.8*DOWN).scale(0.8)
+        # self.next_slide()
+        # self.play(FadeIn(text_work))
+        # self.next_slide()
+        # self.play(FadeOut(text_work))
+        # self.wait()
+        # self.next_slide()       
 
-        self.wait(2)  # Wait for a moment to display the scene
+        # self.wait(2)  # Wait for a moment to display the scene
         text_field = Tex('Instead of considering the vector field...  ').next_to(formula_work,0.5*DOWN).scale(0.5)
         text_form = Tex('Consider instead the covector field  ').next_to(formula_work,0.5*DOWN).scale(0.5)
         formula_field = MathTex(r"F(x,y) = \mathrm{sin}(0.5 x)\ e_x +  0.25(\mathrm{cos}(x) + y-2)\ e_y ").next_to(text_field,0.5*DOWN).scale(0.5)

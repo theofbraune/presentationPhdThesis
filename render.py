@@ -16,6 +16,7 @@ from slides.slide6 import slide6
 from slides.slide7 import slide7
 from slides.slide8 import slide8
 from slides.extDerSlide import ExteriorDerivativeSlides
+from slides.slideBianchi import slideBianchi
 # from slides.teaserBundleValued import teaser_bundle_valued
 # from slides.slide9 import slide9
 # from slides.slide_connection import slide_connection
@@ -45,13 +46,14 @@ class FullPresentation(ThreeDSlide):
         GoalSlide,
         ScalarDEC_cover,
         ScalarValuedDEC,
-        slide3,
+        # slide3,
         slide4,
         slide5,
         slide6,
         slide7,
         slide8,
         ExteriorDerivativeSlides,
+        slideBianchi
         # slide12,
         # TransitionBundleValued,
         # slide13,

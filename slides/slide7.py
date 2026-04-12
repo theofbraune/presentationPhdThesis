@@ -117,7 +117,7 @@ class slide7(Slide):
                 run_time=0.15,
             )
 
-        FadeOut(gallery_text),
+        self.play(FadeOut(gallery_text))
         # The gap statement, in the same area as the original Cartan beat
         gap_text = Tex(
             r"But Cartan also developed a \textit{bundle-valued} exterior calculus.",

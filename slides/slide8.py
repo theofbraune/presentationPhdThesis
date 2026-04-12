@@ -23,15 +23,13 @@ class slide8(Slide):
             r"A vector space (the \textit{fiber} $E_p$) attached to each point of $M$.",
             font_size=24,
         ).next_to(title, 2*DOWN, aligned_edge=LEFT, buff=0.6)
-        # bundle_caption.set_width(7)
         self.play(FadeIn(bundle_caption))
         self.next_slide()
 
         section_caption = Tex(
             r"A \textit{section} $\psi$ chooses one $\psi(p)\in E_p$ per point.",
-            font_size=22,
+            font_size=24,
         ).next_to(bundle_caption, 2*DOWN, aligned_edge=LEFT, buff=0.4)
-        # section_caption.set_width(7)
         self.play(FadeIn(section_caption))
         self.wait(0.5)
         self.next_slide()
@@ -49,14 +47,10 @@ class slide8(Slide):
         self.next_slide()
 
         # =====================================================================
-        # BEAT 2 — CONNECTIONS & PARALLEL TRANSPORT (enriched)
+        # BEAT 2 — CONNECTIONS & PARALLEL TRANSPORT
         # =====================================================================
 
-        # ---- 2a: the question — how do we compare vectors in different fibers?
-        compare_img = ImageMobject("figures/connections/two_connections_compare.png")
-        compare_img.scale(0.75).to_edge(RIGHT).shift(DOWN * 0.2)
-        self.play(FadeIn(compare_img))
-
+        # ---- 2a: the question
         question = Tex(
             r"How do we compare vectors in different fibers?",
             font_size=24,
@@ -65,42 +59,40 @@ class slide8(Slide):
         self.next_slide()
 
         # ---- 2b: the answer — a connection
-        # todo add here the animation from sigg
         answer = Tex(
             r"A \textit{connection} $\nabla$ specifies how to slide vectors between fibers along a curve.",
             font_size=24,
         ).next_to(question, DOWN, aligned_edge=LEFT, buff=0.4)
-        answer.set_width(6.5)
         self.play(FadeIn(answer))
         self.next_slide()
 
-        # ---- 2c: parallel transport — the vector follows the twist of the bundle
+        # ---- 2c: parallel transport
         pt_setup = ImageMobject("figures/connections/parallel_transport_setupy.png")
         pt_setup.scale(0.85).to_edge(RIGHT).shift(DOWN * 0.2)
-        self.play(FadeOut(compare_img), FadeIn(pt_setup))
+        self.play(FadeIn(pt_setup))
         self.next_slide()
 
         pt_done = ImageMobject("figures/connections/parallel_transport_finishedy.png")
         pt_done.scale(0.85).to_edge(RIGHT).shift(DOWN * 0.2)
+        self.play(FadeOut(pt_setup), FadeIn(pt_done))
 
-        # twist_caption = Tex(
-        #     r"The vector \textit{follows the twist} of the bundle.",
-        #     font_size=20,
-        #     color=YELLOW,
-        # ).next_to(answer, DOWN, aligned_edge=LEFT, buff=0.4)
-
-        self.play(FadeOut(pt_setup), FadeIn(pt_done)) 
-        #.  FadeIn(twist_caption))
+        # --- NEW: parallel transport caption ---
+        pt_caption = Tex(
+            r"A connection assigns a parallel transport map "
+            r"$\mathcal{R}_\gamma \colon E_{\gamma(0)} \to E_{\gamma(1)}$ to each path $\gamma$.",
+            font_size=22,
+        ).next_to(answer, DOWN, aligned_edge=LEFT, buff=0.4)
+        self.play(FadeIn(pt_caption))
         self.next_slide()
 
-        # ---- 2d: covariant derivative — formula evolves from naive attempt to definition
+        # ---- 2d: covariant derivative — naive attempt
         cov1 = ImageMobject("figures/connections/covariant_derivative_setup.png")
         cov1.scale(0.75).to_edge(RIGHT).shift(DOWN * 0.2)
 
         cov_question = Tex(
             r"How do we differentiate a section?",
-            font_size=22,
-        ).next_to(answer, DOWN, aligned_edge=LEFT, buff=0.4)
+            font_size=24,
+        ).next_to(pt_caption, DOWN, aligned_edge=LEFT, buff=0.4)
 
         self.play(
             FadeOut(pt_done),
@@ -109,7 +101,7 @@ class slide8(Slide):
         )
         self.next_slide()
 
-        # Step 1: the naive difference quotient — values live in different fibers, doesn't make sense
+        # Step 1: naive difference quotient
         formula_step1 = MathTex(
             r"\frac{\psi_{\gamma(t+h)} \;-\; \psi_{\gamma(t)}}{h} \;\;?",
             font_size=26,
@@ -125,7 +117,7 @@ class slide8(Slide):
         self.play(FadeIn(naive_caption))
         self.next_slide()
 
-        # Step 2: the fix — parallel-transport ψ at t+h back to t, image gains the transport arrow
+        # Step 2: fix with parallel transport
         cov2 = ImageMobject("figures/connections/covariant_derivative_with_parallel_transport.png")
         cov2.scale(0.75).to_edge(RIGHT).shift(DOWN * 0.2)
 
@@ -142,7 +134,7 @@ class slide8(Slide):
         )
         self.next_slide()
 
-        # Step 3: take the limit, name it ∇_X ψ
+        # Step 3: take the limit
         formula_step3 = MathTex(
             r"\nabla_X\psi \;:=\; \lim_{h\to 0}"
             r"\frac{\mathcal{R}_{\gamma(t),\gamma(t+h)}\,\psi_{\gamma(t+h)} \;-\; \psi_{\gamma(t)}}{h}",
@@ -153,17 +145,13 @@ class slide8(Slide):
         self.wait(0.5)
         self.next_slide()
 
-
-       
-        # ---- 2e: coordinate form, name ω
-        # The image swaps from "parallel transport" to "frame field" because
-        # the coordinate form depends on a choice of frame.
+        # ---- 2e: coordinate form, connection 1-form ω
         frame_pic = ImageMobject("figures/connections/covariant_derivative_frame_aftery.png")
         frame_pic.scale(0.75).to_edge(RIGHT).shift(DOWN * 0.2)
 
         in_a_frame = Tex(
             r"In a local frame:",
-            font_size=22,
+            font_size=24,
         ).next_to(formula_step1, DOWN, aligned_edge=LEFT, buff=0.4)
 
         coord_form = MathTex(
@@ -173,7 +161,7 @@ class slide8(Slide):
 
         omega_label = Tex(
             r"$\omega$: the \textit{connection 1-form}",
-            font_size=20,
+            font_size=24,
             color=YELLOW,
         ).next_to(coord_form, DOWN, aligned_edge=LEFT, buff=0.15)
 
@@ -186,11 +174,12 @@ class slide8(Slide):
         self.play(FadeIn(omega_label))
         self.wait(0.5)
         self.next_slide()
-       
-        # let the elements disappear 
-        titleBundleValued = Tex(r"Bundle valued forms", font_size=30).to_corner(UL)
-        self.play(
 
+        # =====================================================================
+        # BEAT 2f — CURVATURE
+        # =====================================================================
+        curv_title = Tex(r"Connections \& curvature", font_size=30).to_corner(UL)
+        self.play(
             FadeOut(frame_pic),
             FadeOut(in_a_frame),
             FadeOut(coord_form),
@@ -199,23 +188,77 @@ class slide8(Slide):
             FadeOut(cov_question),
             FadeOut(question),
             FadeOut(answer),
-            FadeOut(cov1),
-            FadeOut(cov2),
-            FadeOut(new_title),
-            FadeOut(title),
-            FadeIn(titleBundleValued)
+            FadeOut(frame_pic),
+            FadeOut(pt_caption),
+            Transform(title, curv_title),
         )
+        self.next_slide()
+
+        # question: what if parallel transport depends on the path?
+        curv_question = Tex(
+            r"What if $\mathcal{R}_\gamma$ depends on the path, not just the endpoints?",
+            font_size=24,
+        ).next_to(title, DOWN, aligned_edge=LEFT, buff=0.5)
+        self.play(FadeIn(curv_question))
+        self.next_slide()
+
+        # holonomy image — swap for a loop figure if you have one
+        holonomy_img = ImageMobject("figures/connections/parallel_transport_finishedy.png")
+        holonomy_img.scale(0.85).to_edge(RIGHT).shift(DOWN * 0.2)
+        self.play(FadeIn(holonomy_img))
+
+        holonomy_caption = Tex(
+            r"Parallel-transporting a vector around a loop returns it \textit{rotated}: this is \textit{holonomy}.",
+            font_size=24,
+        ).next_to(curv_question, DOWN, aligned_edge=LEFT, buff=0.4)
+        self.play(FadeIn(holonomy_caption))
+        self.next_slide()
+
+        # curvature formula
+        curvature_formula = MathTex(
+            r"\Omega^\nabla \;=\; d\omega + \omega \wedge \omega",
+            font_size=28,
+        ).next_to(holonomy_caption, DOWN, aligned_edge=LEFT, buff=0.4)
+
+        curvature_caption = Tex(
+            r"$\Omega^\nabla$ is the \textit{curvature 2-form}: it measures infinitesimal holonomy.",
+            font_size=24,
+            color=YELLOW,
+        ).next_to(curvature_formula, DOWN, aligned_edge=LEFT, buff=0.2)
+
+        self.play(FadeIn(curvature_formula))
+        self.play(FadeIn(curvature_caption))
+        self.next_slide()
 
 
+        # =====================================================================
+        # CLEAR — transition to BEAT 3
+        # =====================================================================
+        titleBundleValued = Tex(r"Bundle valued forms", font_size=30).to_corner(UL)
+        self.play(
+            FadeOut(curv_question),
+            FadeOut(holonomy_img),
+            FadeOut(holonomy_caption),
+            FadeOut(curvature_formula),
+            FadeOut(curvature_caption),
+            FadeOut(question),
+            FadeOut(answer),
+            FadeOut(pt_caption),
+            FadeOut(title),
+            FadeIn(titleBundleValued),
+        )
         self.wait()
         self.next_slide()
+
         # =====================================================================
         # BEAT 3 — BUNDLE-VALUED FORMS (side-by-side)
         # =====================================================================
-        textFormally = Tex(r" Formally, bundle-valued $k$-forms are $\Omega^k(M,E) = \Omega^k(M) \otimes E$.", font_size=22).next_to(titleBundleValued, DOWN, aligned_edge=LEFT, buff=0.4)
+        textFormally = Tex(
+            r"Formally, bundle-valued $k$-forms are $\Omega^k(M,E) = \Omega^k(M) \otimes E$.",
+            font_size=24,
+        ).next_to(titleBundleValued, DOWN, aligned_edge=LEFT, buff=0.4)
         self.play(FadeIn(textFormally))
         self.next_slide()
-
 
         scalar_img = ImageMobject("figures/two_forms_scalar_valued.png").scale(0.85)
         scalar_img.shift(LEFT * 3 + 1.5 * DOWN * 0.3)
@@ -225,11 +268,11 @@ class slide8(Slide):
 
         scalar_label = Tex(
             r"scalar 2-form: returns a \textit{number}",
-            font_size=22,
+            font_size=24,
         ).next_to(scalar_img, UP, buff=0.2)
         bundle_form_label = Tex(
             r"bundle-valued 2-form: returns a \textit{vector}",
-            font_size=22,
+            font_size=24,
         ).next_to(bundle_form_img, UP, buff=0.2)
 
         self.play(FadeIn(scalar_img), FadeIn(scalar_label))
@@ -240,7 +283,7 @@ class slide8(Slide):
         transition = Tex(
             r"To differentiate them we need the covariant exterior derivative $d^{\nabla}$.",
             font_size=24,
-        ).to_edge(DOWN, buff=0.6)
+        ).to_corner(DL).shift(UP * 0.3 + RIGHT * 0.3)
         self.play(FadeIn(transition))
         self.wait()
         self.next_slide()
