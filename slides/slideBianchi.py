@@ -123,7 +123,7 @@ class slideBianchi(Slide):
         # Curvatue as derivatice of omega 
         # ================================================================
         textCurvature = Tex(
-            "Curvature: Covariant derivative of the connection 1-form $\\omega$: $$\Omega^{\\nabla} = d\\omega + \\omega\wedge\\omega$$",
+            "Curvature: Exterior covariant derivative of the connection 1-form $\\omega$: $$\Omega^{\\nabla} = d\\omega + \\omega\wedge\\omega$$",
             font_size=26
         ).next_to(intro, 2*DOWN, aligned_edge=LEFT)
         self.play(FadeIn(textCurvature))

@@ -38,7 +38,7 @@ class GoalSlide(Slide):
         ]
         image_paths = [
             "figures/connection_2.png",
-            "figures/bunnyFig.png",
+            "figures/bunnyFigChop.png",
             "figures/retraction.png",
         ]
 

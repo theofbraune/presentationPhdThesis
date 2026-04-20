@@ -15,6 +15,8 @@ preamble=r"""
 \newcommand{\nab}{\nabla}
 \newcommand{\dnab}{d^{\nabla}}
 \newcommand{\Onab}{\Omega^{\nabla}}
+\usepackage{ulem}
+\usepackage{xcolor}
 """
 
 )

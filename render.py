@@ -15,8 +15,11 @@ from slides.slide6 import slide6
 # from slides.stokes import stokes 
 from slides.slide7 import slide7
 from slides.slide8 import slide8
+from slides.slide8b import slide8b
+from slides.slideBundleValued import BundleValuedFormsIntro
 from slides.extDerSlide import ExteriorDerivativeSlides
-from slides.slideBianchi import slideBianchi
+from slides.slideTorsionIntro import TorsionCover
+from slides.slideTorsionSmooth import slideTorsionIntro
 # from slides.teaserBundleValued import teaser_bundle_valued
 # from slides.slide9 import slide9
 # from slides.slide_connection import slide_connection
@@ -46,14 +49,16 @@ class FullPresentation(ThreeDSlide):
         GoalSlide,
         ScalarDEC_cover,
         ScalarValuedDEC,
-        # slide3,
         slide4,
         slide5,
         slide6,
         slide7,
         slide8,
+        slide8b,
+        BundleValuedFormsIntro,
         ExteriorDerivativeSlides,
-        slideBianchi
+        TorsionCover,
+        slideTorsionIntro,
         # slide12,
         # TransitionBundleValued,
         # slide13,
