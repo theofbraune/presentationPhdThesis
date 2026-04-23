@@ -1,3 +1,4 @@
+from email.mime import image
 from manim import *
 from manim_slides import Slide
 import utils.preamble as preamble
@@ -27,7 +28,7 @@ class slideControllingTorsionCurvature(Slide):
         self.next_slide()
 
         hodge_formula = Tex(
-            r"Apply Hodge-Decomposition $\alpha \;=\; df + \delta g +h$ ",
+            r"Apply Hodge-Decomposition:\quad $\alpha \;=\; df + \delta g +h$ ",
             font_size=24,
         ).next_to(textHodge, DOWN, aligned_edge=LEFT, buff=0.3)
         self.play(FadeIn(hodge_formula))
@@ -49,6 +50,82 @@ class slideControllingTorsionCurvature(Slide):
         textExample = Tex(r"Example: Trivial Connections [Crane et al. 2010] with Torsion Control", font_size = 24).next_to(textCurvControls, DOWN, aligned_edge=LEFT, buff=0.3)
         self.play(FadeIn(textExample))
         self.next_slide()
+        # include the picture of the spot with sing 
+        imageSpot = ImageMobject("figures/cowWithSing.png",).scale(0.7).next_to(textExample, DOWN, aligned_edge=LEFT, buff=0.3)
+        self.play(FadeIn(imageSpot))
+        self.next_slide()
+        imageField = ImageMobject("figures/cowWithSingField.png").scale(0.7).next_to(
+            textExample, DOWN, aligned_edge=LEFT, buff=0.3
+        )
+        self.play(Transform(imageSpot, imageField))
+        self.next_slide()
+        imageWithOneVec = ImageMobject("figures/initialVector.png")
+        imageWithOneVec.height = imageField.height
+        imageWithOneVec.move_to(imageField.get_center())   # <-- use move_to, not .center =
+        self.play(FadeIn(imageWithOneVec))
+        self.wait()
+        self.next_slide()
+
+        imageWithConn = ImageMobject("figures/initialFrameWithConn.png")
+        imageWithConn.height = imageField.height
+        imageWithConn.move_to(imageField.get_center())     # <-- same here
+        self.play(Transform(imageWithOneVec, imageWithConn))
+        self.next_slide()
+
+        
+
+        # match video position and size exactly to imageField
+        local_video = play_video_loop(
+            self,
+            frame_dir="figures/advectVectors",
+            position=imageField.get_center(),   # <-- sit exactly over imageWithConn
+            height=imageField.height,           # <-- match exact height
+            fps=20,
+            fade_in_time=0.5,
+            fade_out_time=0.0,
+            persist=True,
+        )
+
+        
+        # self.remove(local_video)
+        self.wait()
+        self.next_slide()
+        imageCurvature = ImageMobject("figures/discreteCurvatureSpot.png")
+        imageCurvature.height = imageField.height
+        imageCurvature.move_to(imageField.get_center())
+
+        self.play(FadeIn(imageCurvature))
+        self.next_slide()
+        textCurv = Tex(r" Curvature $\rightarrow$ angle defect of parallel transport around dual loop", font_size = 24).next_to(imageCurvature, RIGHT, buff=0.5)
+        self.play(FadeIn(textCurv))
+        self.wait()
+        self.next_slide()
+        textConn = Tex(r" Global linear solve for $\alpha$ such that the connection is trivial!", font_size = 24).next_to(textCurv, DOWN, buff=0.5)
+        self.play(FadeIn(textConn))
+        self.wait()
+        self.next_slide()
+        self.remove(local_video)
+        self.remove(imageCurvature)
+        self.remove(imageWithOneVec)
+        self.remove(imageWithConn)
+        posField = imageField.get_center()
+        heightField = imageField.height
+        self.remove(imageSpot)
+
+        next_video = play_video_loop(
+            self,
+            frame_dir="figures/advectVectorsSecondPart",
+            position=posField,   # <-- sit exactly over imageConn
+            height=heightField,           # <-- match exact height
+            fps=20,
+            fade_in_time=0.5,
+            fade_out_time=0.0,
+            persist=True,
+        )
+        self.wait()
+        self.next_slide()
+        self.remove()
+
 
         """
         # =====================================================================

@@ -20,6 +20,17 @@ from slides.slideBundleValued import BundleValuedFormsIntro
 from slides.extDerSlide import ExteriorDerivativeSlides
 from slides.slideTorsionIntro import TorsionCover
 from slides.slideTorsionSmooth import slideTorsionIntro
+from slides.slideDiscreteLC import slideDiscreteLeviCivita
+from slides.slidediscreteLC2 import slideDiscreteLeviCivita2
+from slides.slideDiscreteTorsion import slideDiscreteTorsion
+from slides.slideControlTorsion import slideControllingTorsionCurvature
+from slides.slideControlTorsionCont import slideControllingTorsionCurvatureCont
+from slides.slideControlTorsionCont2 import slideControllingTorsionCurvatureCont2
+from slides.slideFullDECCover import FullDECCover
+
+"""
+# from slides.slideDiscreteTorsion3 import slideDiscreteTorsion3
+
 # from slides.teaserBundleValued import teaser_bundle_valued
 # from slides.slide9 import slide9
 # from slides.slide_connection import slide_connection
@@ -39,7 +50,7 @@ from slides.slideTorsionSmooth import slideTorsionIntro
 # from slides.slide19 import slide19
 # from slides.slide20 import slide20
 # ... (all other imports)
-
+"""
 # Define the master presentation class. 
 class FullPresentation(ThreeDSlide): 
     
@@ -59,6 +70,13 @@ class FullPresentation(ThreeDSlide):
         ExteriorDerivativeSlides,
         TorsionCover,
         slideTorsionIntro,
+        slideDiscreteLeviCivita,
+        slideDiscreteLeviCivita2,
+        slideDiscreteTorsion,
+        slideControllingTorsionCurvature,
+        slideControllingTorsionCurvatureCont,
+        slideControllingTorsionCurvatureCont2,
+        FullDECCover,
         # slide12,
         # TransitionBundleValued,
         # slide13,
