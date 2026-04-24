@@ -17,7 +17,7 @@ class ScalarValuedDEC(Slide):
         # self.play(vector_field.animate.become(ArrowVectorField(func)))
         # self.wait()
 
-        title_text = Tex("Work in a force field along a path",font_size=30).to_corner(UL)
+        title_text = Tex("Work in a force field along a path",font_size=30, ).to_corner(UL)
         text_domain = Rectangle(color=BLACK,height=7,width=7, fill_opacity = 0.85)
         text_domain.next_to(title_text, DOWN).align_to(title_text, LEFT)
         self.next_slide()
@@ -125,10 +125,12 @@ class ScalarValuedDEC(Slide):
         
         self.play(Transform(tangent_vectors,tangent_vectors_shift),Transform(vf,vf_shift))
         self.next_slide()
+        self.wait()
         for obj in langle_rangle_komma:
             obj.set_opacity(1.)
         
         self.next_slide()
+        self.wait()
         d1 = Dot().set_color(ORANGE)
         self.next_slide()
         self.play(MoveAlongPath(d1, curve), rate_func=linear)

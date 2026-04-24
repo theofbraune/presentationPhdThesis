@@ -27,11 +27,15 @@ class slideTorsionIntro(Slide):
             font_size=24,
         ).next_to(title, DOWN, aligned_edge=LEFT, buff=0.4)
         self.play(FadeIn(intro))
+        solderTex = MathTex(r"\theta[X] = X", font_size=34).next_to(intro, DOWN+RIGHT, buff=0.3)
+        self.play(FadeIn(solderTex))
+        self.wait()
+        self.next_slide()
+        self.remove(solderTex)
         self.next_slide()
 
         torsion_def = Tex(
-            r"One natural example of $d^\nabla$ applied to a bundle-valued form is "
-            r"the \textit{torsion 2-form}:",
+            r"Natural example of $d^\nabla$:  \textit{Torsion 2-form}:",
             font_size=24,
         ).next_to(intro, DOWN, aligned_edge=LEFT, buff=0.3)
         self.play(FadeIn(torsion_def))
@@ -104,7 +108,7 @@ class slideTorsionIntro(Slide):
         ).next_to(lcTeaserText2, DOWN, aligned_edge=LEFT, buff=0.5)
         self.play(FadeIn(affine_text))
         self.next_slide()
-        affineTransform = Tex("Given a reference connection, all connections differ by a 1-form", font_size=24).next_to(affine_text, DOWN, aligned_edge=LEFT, buff=0.3)
+        affineTransform = Tex("Given a reference connection, ALL connections differ by a 1-form", font_size=24).next_to(affine_text, DOWN, aligned_edge=LEFT, buff=0.3)
         self.play(FadeIn(affineTransform))
         self.next_slide()
 
@@ -136,20 +140,82 @@ class slideTorsionIntro(Slide):
         formula = MathTex(r"\Theta^\nabla \;=\; d\theta + \omega^\nabla \wedge \theta ", font_size=34).next_to(text2, DOWN, aligned_edge=LEFT, buff=0.4)
         self.play(FadeIn(text2), FadeIn(formula))
         self.next_slide()
-        formula2 = MathTex(r"= \underbrace{d\theta + \omega^{\mathrm{LC}} \wedge \theta}_{=\,0} + J\alpha \wedge \theta", font_size=34).next_to(formula, DOWN, aligned_edge=LEFT, buff=0.3)
-        self.play(FadeIn(formula2))
-        formula3 = MathTex(r"= \underbrace{d\theta + \omega^{\mathrm{LC}} \wedge \theta}_{=\,0} + \begin{pmatrix}0& -\alpha \\ \alpha& 0\end{pmatrix} \wedge \begin{pmatrix}dx \\ dy \end{pmatrix} = \begin{pmatrix}-\alpha\wedge dy \\ \alpha\wedge dx\end{pmatrix}", font_size=34).next_to(formula, DOWN, aligned_edge=LEFT, buff=0.3)
-        self.play(Transform(formula2, formula3))
+        # ── step 1: show the initial expansion ──────────────────────────────
+        f_zero = MathTex(
+            r"d\theta + \omega^{\mathrm{LC}} \wedge \theta",
+            font_size=34,
+        ).next_to(formula, DOWN, aligned_edge=LEFT, buff=0.3)
+
+        f_plus = MathTex(
+            r"+ J\alpha \wedge \theta",
+            font_size=34,
+        ).next_to(f_zero, RIGHT, buff=0.2)
+
+        eq_sign = MathTex(r"=", font_size=34).next_to(formula, 1.1 * DOWN, aligned_edge=LEFT, buff=0.3)
+        # reposition: eq = f_zero f_plus in a row
+        eq_sign.next_to(formula, 1.1 * DOWN, aligned_edge=LEFT, buff=0.3)
+        f_zero.next_to(eq_sign, RIGHT, buff=0.2)
+        f_plus.next_to(f_zero, RIGHT, buff=0.2)
+
+        self.play(FadeIn(eq_sign), FadeIn(f_zero), FadeIn(f_plus))
         self.next_slide()
-        formula4 = MathTex(r"= \underbrace{d\theta + \omega^{\mathrm{LC}} \wedge \theta}_{=\,0} + \begin{pmatrix}0& -\alpha \\ \alpha& 0\end{pmatrix} \wedge \begin{pmatrix}dx \\ dy \end{pmatrix} = \begin{pmatrix}-\alpha\wedge dy \\ \alpha\wedge dx\end{pmatrix} = \begin{pmatrix}-\alpha_x dx\wedge dy \\ \alpha_y dy \wedge dx\end{pmatrix}", font_size=34).next_to(formula, DOWN, aligned_edge=LEFT, buff=0.3)
-        self.play(Transform(formula2, formula4))
+
+        # ── step 2: strike through the zero part ────────────────────────────
+        strike = Line(
+            f_zero.get_left()  + DOWN * 0.05,
+            f_zero.get_right() + DOWN * 0.05,
+            color=RED, stroke_width=4,
+        )
+        label_zero = MathTex(r"=\,0", font_size=20, color=RED
+                             ).next_to(f_zero, DOWN, buff=0.1)
+        self.play(Create(strike), FadeIn(label_zero))
         self.next_slide()
-        formula5 = MathTex(r"=-\alpha^\sharp d\mathrm{vol}", font_size=34).next_to(formula4, DOWN, aligned_edge=LEFT, buff=0.3)
+
+        # ── step 3: expand Jα as matrix, append to the right ────────────────
+        f_matrix = MathTex(
+            r"= \begin{pmatrix}0 & -\alpha \\ \alpha & 0\end{pmatrix}"
+            r"\wedge \theta",
+            font_size=34,
+        ).next_to(f_plus, RIGHT, buff=0.2)
+        self.play(Write(f_matrix))
+        self.next_slide()
+        f_matrix2 = MathTex(
+            r"= \begin{pmatrix}0 & -\alpha \\ \alpha & 0\end{pmatrix}"
+            r"\wedge \begin{pmatrix}dx \\ dy\end{pmatrix}",
+            font_size=34,
+        ).next_to(f_plus, RIGHT, buff=0.2)
+        self.play(TransformMatchingTex(f_matrix, f_matrix2))
+        self.next_slide()
+
+        # ── step 4: append the first result column vector ────────────────────
+        f_result1 = MathTex(
+            r"= \begin{pmatrix}-\alpha\wedge dy \\ \alpha\wedge dx\end{pmatrix}",
+            font_size=34,
+        ).next_to(f_matrix2, RIGHT, buff=0.2)
+        self.play(Write(f_result1))
+        self.next_slide()
+
+        # ── step 5: append the expanded wedge products ───────────────────────
+        f_result2 = MathTex(
+            r"= \begin{pmatrix}-\alpha_x\,dx\wedge dy \\ "
+            r"\alpha_y\,dy\wedge dx\end{pmatrix}",
+            font_size=34,
+        ).next_to(f_result1, RIGHT, buff=0.2)
+        self.play(Write(f_result2))
+        self.next_slide()
+
+        # ── step 6: final result below ───────────────────────────────────────
+        formula5 = MathTex(
+            r"= -\alpha^\sharp\, d\mathrm{vol}",
+            font_size=34, color=YELLOW,
+        ).next_to(eq_sign, 1.5*DOWN, aligned_edge=LEFT, buff=0.5)
         self.play(FadeIn(formula5))
-
         self.next_slide()
-        textWell = Tex(r"Well Suited for Discretization!!", font_size=50, color=YELLOW).next_to(formula5, 2*DOWN, aligned_edge=LEFT, buff=0.4)
 
+        textWell = Tex(
+            r"Well suited for discretization!",
+            font_size=40, color=YELLOW,
+        ).next_to(formula5, DOWN, aligned_edge=LEFT, buff=0.4)
         self.play(FadeIn(textWell))
         self.next_slide()
 

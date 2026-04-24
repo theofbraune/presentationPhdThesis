@@ -111,3 +111,121 @@ def play_video_loop(
     scene.remove(current)
     return None
 
+
+def play_video_loop_with_custom_range(
+    scene: Slide,
+    frame_dir: str,
+    position=ORIGIN,
+    height=None,
+    width=None,
+    fps=24,
+    fade_in_time=0.5,
+    fade_out_time=0.5,
+    loop=True,
+    persist=False,
+    start_frame=0,
+    max_frames=None,
+):
+    """
+    Play a sequence of frames as a looping video inside a manim-slides Slide.
+
+    Parameters
+    ----------
+    scene : Slide
+        The current slide (pass `self` from within `construct`).
+    frame_dir : str
+        Path to the folder containing the frame images.
+    position : np.ndarray
+        Where to place the video center.
+    height, width : float, optional
+        Target size in scene units. If height is set, width is ignored.
+    fps : int
+        Playback rate.
+    fade_in_time : float
+        Duration of the fade-in on the first frame. 0 to skip.
+    fade_out_time : float
+        Duration of the fade-out after the loop. 0 to skip.
+        Ignored when `persist=True`.
+    loop : bool
+        If True, wraps playback in a manim-slides loop segment.
+    persist : bool
+        If True, the last frame stays on screen and is returned as an
+        ImageMobject you can animate further. If False, the video fades
+        out (or is removed) and None is returned.
+    start_frame : int
+        Index of the first frame to play (0-indexed). Default 0.
+    max_frames : int or None
+        Maximum number of frames to play from start_frame.
+        If None, plays all remaining frames.
+
+    Returns
+    -------
+    ImageMobject or None
+        The last frame (still on scene) if `persist=True`, else None.
+    """
+    all_frames = load_frames(frame_dir)
+    if not all_frames:
+        raise ValueError(f"No frames found in {frame_dir}")
+
+    # ── slice to the requested range ─────────────────────────────────────────
+    end_frame = (start_frame + max_frames
+                 if max_frames is not None
+                 else len(all_frames))
+    end_frame = min(end_frame, len(all_frames))   # clamp to available frames
+    start_frame = max(0, start_frame)             # clamp to valid start
+
+    frames = all_frames[start_frame:end_frame]
+
+    if not frames:
+        raise ValueError(
+            f"No frames in range [{start_frame}:{end_frame}] "
+            f"(total frames: {len(all_frames)})"
+        )
+
+    # ── normalize size + position on every frame ──────────────────────────────
+    def _fit(f):
+        if height is not None:
+            f.height = height
+        elif width is not None:
+            f.width = width
+        f.move_to(position)
+
+    for f in frames:
+        _fit(f)
+
+    first = frames[0]
+    dt = 1.0 / fps
+
+    # ── fade in on the first frame ────────────────────────────────────────────
+    first.set_opacity(0)
+    scene.add(first)
+    if fade_in_time > 0:
+        scene.play(first.animate.set_opacity(1), run_time=fade_in_time)
+    else:
+        first.set_opacity(1)
+
+    current = first
+
+    # ── mark the loop region ──────────────────────────────────────────────────
+    use_loop = loop and not persist
+    if use_loop:
+        scene.next_slide(loop=True)
+
+    # ── play through frames ───────────────────────────────────────────────────
+    for f in frames[1:]:
+        scene.remove(current)
+        scene.add(f)
+        current = f
+        scene.wait(dt)
+
+    if loop:
+        scene.next_slide()  # exits the loop segment
+
+    # ── ending behavior ───────────────────────────────────────────────────────
+    if persist:
+        return current
+
+    if fade_out_time > 0:
+        scene.play(current.animate.set_opacity(0), run_time=fade_out_time)
+    scene.remove(current)
+    return None

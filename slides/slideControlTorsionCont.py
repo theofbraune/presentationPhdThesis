@@ -51,6 +51,8 @@ class slideControllingTorsionCurvatureCont(Slide):
         self.next_slide()
         posFirst = imageFirst.get_center()
         heightFirst = imageFirst.height
+        textDelta = Tex(r" Fix $\delta$ ", font_size=24).next_to(imageFirst, DOWN+RIGHT, aligned_edge=LEFT, buff=0.3)
+        self.play(FadeIn(textDelta))
         next_video = play_video_loop(
             self,
             frame_dir="figures/render_cow_LC/croppedOut/",
@@ -69,9 +71,9 @@ class slideControllingTorsionCurvatureCont(Slide):
         imageAddedTorsion.next_to(next_video, RIGHT, buff=0.5)
 
         textExtraTorsion = Tex(
-            r"Added exact torsion component",
+            r"Added exact torsion component $df$",
             font_size=20, color=YELLOW,
-        ).next_to(imageAddedTorsion, DOWN, aligned_edge=LEFT, buff=0.15)
+        ).next_to(imageAddedTorsion, DOWN,  buff=0.15)
 
         self.play(FadeIn(imageAddedTorsion), FadeIn(textExtraTorsion))
         self.next_slide()

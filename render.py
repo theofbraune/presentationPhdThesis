@@ -5,6 +5,7 @@ from manim_slides import Slide, ThreeDSlide
 # Import all your scene classes (assuming these imports are correct)
 # from cemetary.presentation import slide11
 from slides.introThesis import Intro
+from slides.slideBundleVal2 import BundleValuedFormsIntro2
 from slides.slideGoal import GoalSlide
 from slides.scalarDECcover import ScalarDEC_cover
 from slides.scalarValuedDEC import ScalarValuedDEC
@@ -64,9 +65,10 @@ class FullPresentation(ThreeDSlide):
         slide5,
         slide6,
         slide7,
+        BundleValuedFormsIntro,
+        BundleValuedFormsIntro2,
         slide8,
         slide8b,
-        BundleValuedFormsIntro,
         ExteriorDerivativeSlides,
         TorsionCover,
         slideTorsionIntro,

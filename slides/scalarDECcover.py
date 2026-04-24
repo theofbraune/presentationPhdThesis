@@ -10,8 +10,7 @@ class ScalarDEC_cover(Slide):
         title.to_edge(UP)  # Position the text at the top of the frame
         self.add(title)
         
-        self.wait()
-        self.next_slide()
+        
 
 
         formula_stokes = MathTex(r"\int_{M} d\alpha = \int_{\partial M}\alpha").to_edge(LEFT).scale(0.8)
