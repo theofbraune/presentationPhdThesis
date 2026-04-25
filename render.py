@@ -4,30 +4,34 @@ from manim import * # Add this line to ensure all Manim functions are available
 from manim_slides import Slide, ThreeDSlide
 # Import all your scene classes (assuming these imports are correct)
 # from cemetary.presentation import slide11
-from slides.introThesis import Intro
-from slides.slideBundleVal2 import BundleValuedFormsIntro2
-from slides.slideGoal import GoalSlide
-from slides.scalarDECcover import ScalarDEC_cover
-from slides.scalarValuedDEC import ScalarValuedDEC
-from slides.slide3 import slide3
-from slides.slide4 import slide4
-from slides.slide5 import slide5
-from slides.slide6 import slide6
+from slides.intro.introThesis import Intro
+from slides.intro.slideBundleVal2 import BundleValuedFormsIntro2
+from slides.intro.slideGoal import GoalSlide
+from slides.intro.scalarDECcover import ScalarDEC_cover
+from slides.intro.scalarValuedDEC import ScalarValuedDEC
+from slides.intro.slide3 import slide3
+from slides.intro.slide4 import slide4
+from slides.intro.slide5 import slide5
+from slides.intro.slide6 import slide6
 # from slides.stokes import stokes 
-from slides.slide7 import slide7
-from slides.slide8 import slide8
-from slides.slide8b import slide8b
-from slides.slideBundleValued import BundleValuedFormsIntro
-from slides.extDerSlide import ExteriorDerivativeSlides
-from slides.slideTorsionIntro import TorsionCover
-from slides.slideTorsionSmooth import slideTorsionIntro
-from slides.slideDiscreteLC import slideDiscreteLeviCivita
-from slides.slidediscreteLC2 import slideDiscreteLeviCivita2
-from slides.slideDiscreteTorsion import slideDiscreteTorsion
-from slides.slideControlTorsion import slideControllingTorsionCurvature
-from slides.slideControlTorsionCont import slideControllingTorsionCurvatureCont
-from slides.slideControlTorsionCont2 import slideControllingTorsionCurvatureCont2
-from slides.slideFullDECCover import FullDECCover
+from slides.intro.slide7 import slide7
+from slides.intro.slide8 import slide8
+from slides.intro.slide8b import slide8b
+from slides.intro.slideBundleValued import BundleValuedFormsIntro
+from slides.intro.extDerSlide import ExteriorDerivativeSlides
+
+# for the discrete torsion part 
+from slides.discreteTorsion.slideTorsionIntro import TorsionCover
+from slides.discreteTorsion.slideTorsionSmooth import slideTorsionIntro
+from slides.discreteTorsion.slideDiscreteLC import slideDiscreteLeviCivita
+from slides.discreteTorsion.slidediscreteLC2 import slideDiscreteLeviCivita2
+from slides.discreteTorsion.slideDiscreteTorsion import slideDiscreteTorsion
+from slides.discreteTorsion.slideControlTorsion import slideControllingTorsionCurvature
+from slides.discreteTorsion.slideControlTorsionCont import slideControllingTorsionCurvatureCont
+from slides.discreteTorsion.slideControlTorsionCont2 import slideControllingTorsionCurvatureCont2
+
+# for the full DEC part 
+from slides.FullDEC.slideFullDECCover import FullDECCover
 
 """
 # from slides.slideDiscreteTorsion3 import slideDiscreteTorsion3

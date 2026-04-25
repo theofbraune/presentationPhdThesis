@@ -2,6 +2,7 @@ from manim import *
 from manim_slides import Slide, ThreeDSlide
 import utils.preamble as preamble
 import numpy as np
+from utils.videoLoop import *
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -67,69 +68,115 @@ def make_fiber_arrow(base, tip, t1, t2, color="#000000",
     return VGroup(shaft, head)
 
 
-class slideDiscreteBundle(ThreeDSlide):
+class slideDiscreteBundle(Slide):
     def construct(self):
         title = Tex(r"Discrete Vector Bundles", font_size=30).to_corner(UL)
-        self.add_fixed_in_frame_mobjects(title)
         self.play(FadeIn(title))
         self.next_slide()
 
-        self.set_camera_orientation(phi=55*DEGREES, theta=160*DEGREES, zoom=1.05)
+        # self.set_camera_orientation(phi=55*DEGREES, theta=160*DEGREES, zoom=1.05)
 
         # =====================================================================
         # BEAT 1 — smooth surface + continuous fiber bundle
         # =====================================================================
         textMesh = Tex(
-            r"Start with a smooth manifold $M$ with a vector bundle $E \to M$.",
+            r"Recall: Smooth vector bundle $E \to \mathcal{M}$.",
             font_size=24,
         ).next_to(title, DOWN, aligned_edge=LEFT, buff=0.4)
-        self.add_fixed_in_frame_mobjects(textMesh)
         self.play(FadeIn(textMesh))
 
-        # smooth surface — high resolution
-        surface_smooth = Surface(
-            lambda u, v: surf_point(u, v),
-            u_range=[-5, 5], v_range=[-5, 5],
-            resolution=(50, 50),
-            fill_color="#1B4D5C", fill_opacity=0.85,
-            stroke_color="#2A7A8C", stroke_width=0.0,
-            stroke_opacity=0.4,
-        )
-        self.play(FadeIn(surface_smooth), run_time=1.0)
-
-        # continuous fiber squares — dense grid
-        grid_us_dense = np.linspace(-4.0, 4.0, 8)
-        grid_vs_dense = np.linspace(-4.0, 4.0, 8)
-        fiber_group_smooth = VGroup()
-        for u in grid_us_dense:
-            for v in grid_vs_dense:
-                pt = surf_point(u, v)
-                n  = surf_normal(u, v)
-                fiber_group_smooth.add(
-                    make_fiber_square(pt, n, size=0.25, opacity=0.70)
-                )
-
-        self.play(
-            LaggedStart(*[FadeIn(f) for f in fiber_group_smooth], lag_ratio=0.02),
-            run_time=1.5,
-        )
+        heightImage = 4
+        position = ORIGIN + 2.5*RIGHT + UP * 0.5
+        imageBaseManifold = ImageMobject("figures/discreteFormsAndCurvature/baseManifold.png" )
+        imageBaseManifold.set_height(heightImage)
+        imageBaseManifold.move_to(position)
+        self.play(FadeIn(imageBaseManifold), run_time=1.0)
+        self.wait()
         self.next_slide()
+        position = imageBaseManifold.get_center()
+        imageBundleSmooth = ImageMobject("figures/discreteFormsAndCurvature/baseManifoldWithBundle.png")
+        imageBundleSmooth.set_height(heightImage)
+        imageBundleSmooth.move_to(position)
+        self.play(Transform(imageBaseManifold, imageBundleSmooth), run_time=1.0)
 
         # =====================================================================
         # BEAT 2 — fade out bundle, tessellate into triangles
         # =====================================================================
         textDiscrete = Tex(
-            r"Approximate $M$ by a simplicial mesh $\mathcal{M}$.",
+            r"Approximate $\mathcal{M}$ by a simplicial mesh $M$.",
             font_size=24,
-        ).next_to(textMesh, DOWN, aligned_edge=LEFT, buff=0.35)
-        self.add_fixed_in_frame_mobjects(textDiscrete)
+        ).next_to(textMesh, 2*DOWN, aligned_edge=LEFT, buff=0.35)
+        self.play(FadeIn(textDiscrete))
+        imageDiscreteManifold = ImageMobject("figures/discreteFormsAndCurvature/DiscreteManifoldWithBundle.png")
+        imageDiscreteManifold.set_height(heightImage)
+        imageDiscreteManifold.move_to(position)
+        textFiber = Tex(
+            r" \textit{Discrete vector bundle}: "
+            r"one fiber $E_v \cong \mathbb{R}^r$ per vertex $v$.",
+            font_size=24,
+        ).next_to(textDiscrete, 2*DOWN, aligned_edge=LEFT, buff=0.3)
+        self.play(FadeIn(textFiber), Transform(imageBaseManifold, imageDiscreteManifold), run_time=1.0)
+        self.wait()
+        self.next_slide()
+        # now zoom in on on the triangle
+        firstVideoSeq = play_video_loop(
+            self,
+            frame_dir = "figures/discreteFormsAndCurvature/render_par/croppedOut/",
+            position = position,
+            height = heightImage,
+            fps = 20,
+            fade_in_time = 0.5,
+            fade_out_time = 0.5,
+            persist = True        
+        )
+        self.remove(imageBaseManifold)
+        self.remove(imageDiscreteManifold)
+        imageCover = ImageMobject("figures/discreteFormsAndCurvature/DiscreteManifoldWithBundleZoom.png")
+        imageCover.set_height(heightImage)
+        imageCover.move_to(position)
+        self.add(imageCover)
+        self.remove(firstVideoSeq)
+        textDiscreteConn = Tex(
+            r" \textit{Discrete connection}: "
+            r"parallel transport $R_{v_0,v_1}$ per edge $(v_0,v_1)$ ", font_size = 24
+        ).next_to(textFiber, 2*DOWN, aligned_edge=LEFT, buff=0.3)
+        self.play(FadeIn(textDiscreteConn), run_time=0.8)
+        self.wait()
+        imageConnFirst = ImageMobject("figures/discreteFormsAndCurvature/discreteConn/discreteConn1.png")
+        imageConnFirst.set_height(heightImage)
+        imageConnFirst.move_to(position)
+        # self.play(Transform(imageCover, imageConnFirst), run_time=0.4)
+        self.play(FadeOut(imageCover), FadeIn(imageConnFirst), run_time=0.4)
+        self.wait()
+        self.next_slide()
+        imageConnSecond = ImageMobject("figures/discreteFormsAndCurvature/discreteConn/discreteConn2.png")
+        imageConnSecond.set_height(heightImage)
+        imageConnSecond.move_to(position)
+        # self.play(Transform(imageCover, imageConnSecond), run_time=0.4)
+        self.play(Transform(imageConnFirst, imageConnSecond), run_time=0.4)
+        self.wait()
+        self.next_slide()
+        imageConnThird = ImageMobject("figures/discreteFormsAndCurvature/discreteConn/discreteConn3.png")
+        imageConnThird.set_height(heightImage)
+        imageConnThird.move_to(position)
+        # self.play(Transform(imageCover, imageConnThird), run_time=0.4)
+        self.play(Transform(imageConnSecond, imageConnThird), run_time=0.4)
+        self.wait()
+        self.next_slide()
+        imageConnFourth = ImageMobject("figures/discreteFormsAndCurvature/discreteConn/discreteConn4.png")
+        imageConnFourth.set_height(heightImage)
+        imageConnFourth.move_to(position)
+        # self.play(Transform(imageCover, imageConnFourth), run_time=0.4)
+        self.play(Transform(imageConnThird, imageConnFourth), run_time=0.4)
+        self.wait()
+        self.next_slide()
 
         # fade out the smooth fibers
-        self.play(
-            FadeOut(fiber_group_smooth),
-            FadeIn(textDiscrete),
-            run_time=0.8,
-        )
+        # self.play(
+        #     FadeOut(fiber_group_smooth),
+        #     FadeIn(textDiscrete),
+        #     run_time=0.8,
+        # )
 
         # coarse surface — low resolution, will become the mesh
         # surface_coarse = Surface(
@@ -140,6 +187,9 @@ class slideDiscreteBundle(ThreeDSlide):
         #     stroke_color="#000000", stroke_width=0.0,
         # )
 
+        
+
+        """
         # build triangulated mesh edges explicitly
         # sample a coarse grid and triangulate each quad into 2 triangles
         N_MESH = 6
@@ -219,7 +269,7 @@ class slideDiscreteBundle(ThreeDSlide):
         # =====================================================================
         textConn = Tex(
             r"$\bullet$ \textit{Discrete connection}: "
-            r"one parallel transport map $R_{ij} \in O(r)$ per edge $e_{ij}$.",
+            r"one parallel transport map $R_{ij}$ per edge $e_{ij}$.",
             font_size=24,
         ).next_to(textFiber, DOWN, aligned_edge=LEFT, buff=0.3)
         self.add_fixed_in_frame_mobjects(textConn)
@@ -265,56 +315,9 @@ class slideDiscreteBundle(ThreeDSlide):
             run_time=1.2,
         )
         self.next_slide()
+        """
 
-        # =====================================================================
-        # BEAT 5 — discrete curvature: holonomy around a face
-        # =====================================================================
-        textCurv = Tex(
-            r"$\bullet$ \textit{Discrete curvature}: "
-            r"holonomy $R_{ij}R_{jk}R_{ki}$ around a face.",
-            font_size=24,
-        ).next_to(textConn, DOWN, aligned_edge=LEFT, buff=0.3)
-        self.add_fixed_in_frame_mobjects(textCurv)
-        self.play(FadeIn(textCurv))
-
-        # highlight one triangle face with a loop arrow
-        i_f, j_f = 3, 3
-        pA = surf_point(us_mesh[i_f],   vs_mesh[j_f])
-        pB = surf_point(us_mesh[i_f+1], vs_mesh[j_f])
-        pC = surf_point(us_mesh[i_f],   vs_mesh[j_f+1])
-        nA = surf_normal(us_mesh[i_f], vs_mesh[j_f])
-
-        face_highlight = Polygon(
-            pA, pB, pC,
-            fill_color=YELLOW, fill_opacity=0.35,
-            stroke_color=YELLOW, stroke_width=3,
-        )
-        holonomy_label = MathTex(
-            r"\Omega^\nabla_{ijk}", font_size=22, color=YELLOW,
-        )
-        holonomy_label.move_to(
-            (pA + pB + pC) / 3 + 0.6 * nA
-        )
-        self.add_fixed_orientation_mobjects(holonomy_label)
-
-        self.play(FadeIn(face_highlight), FadeIn(holonomy_label))
-        self.next_slide()
-
-        # =====================================================================
-        # CLEAR
-        # =====================================================================
-        self.move_camera(phi=0*DEGREES, theta=-90*DEGREES, zoom=1.0, run_time=1.0)
-        self.set_camera_orientation(phi=0*DEGREES, theta=-90*DEGREES)
-        self.play(
-            FadeOut(surface_smooth), FadeOut(mesh_edges),
-            FadeOut(fiber_group_discrete), FadeOut(vertex_dots),
-            FadeOut(edge_transport), FadeOut(R_label),
-            FadeOut(face_highlight), FadeOut(holonomy_label),
-            FadeOut(textMesh), FadeOut(textDiscrete),
-            FadeOut(textFiber), FadeOut(textConn), FadeOut(textCurv),
-            FadeOut(title),
-        )
-        self.next_slide()
+       
 
 
 
