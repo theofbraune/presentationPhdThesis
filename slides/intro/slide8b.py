@@ -260,7 +260,7 @@ class slide8b(ThreeDSlide):
         self.add(title)
 
         textConn2 = Tex(
-            r"A connection assigns "
+            r"$\bullet$ A connection assigns "
             r"$\mathcal{R}^\nabla_{\gamma,t} \colon "
             r"E_{\gamma(0)} \to E_{\gamma(t)}$ to each curve $\gamma$.",
             font_size=24,
@@ -275,7 +275,7 @@ class slide8b(ThreeDSlide):
         # CONNECTION 1-FORM: rotating frames in each fiber
         # =====================================================================
         textConnOneForm = Tex(
-            r"Connection one-form $\omega$: infinitesimal change of the rotation",
+            r"$\bullet$ Connection one-form $\omega$: infinitesimal change of the rotation",
             font_size=24,
         ).next_to(textConn2, 2*DOWN, aligned_edge=LEFT, buff=0.3)
         self.add_fixed_in_frame_mobjects(textConnOneForm)
@@ -310,7 +310,7 @@ class slide8b(ThreeDSlide):
         # ω = αJ
         # =====================================================================
         textSkew = Tex(
-            r"On a surface, $\omega$ is skew-symmetric — one scalar 1-form $\alpha$:",
+            r"$\bullet$ On a surface, $\omega$ is skew-symmetric — one scalar 1-form $\alpha$:",
             font_size=24,
         ).next_to(textConnOneForm, 2*DOWN, aligned_edge=LEFT, buff=0.3)
         self.add_fixed_in_frame_mobjects(textSkew)
@@ -328,7 +328,7 @@ class slide8b(ThreeDSlide):
         # CURVATURE TEASER
         # =====================================================================
         textCurv = Tex(
-            r"The \textit{curvature} $\Omega^\nabla$ measures how much "
+            r"$\bullet$ The \textit{curvature} $\Omega^\nabla$ measures how much "
             r"$\mathcal{R}^\nabla_{\gamma,t}$ depends on the path:",
             font_size=24,
         ).next_to(omega_formula, DOWN, aligned_edge=LEFT, buff=0.35)
@@ -343,13 +343,12 @@ class slide8b(ThreeDSlide):
         self.add_fixed_in_frame_mobjects(curv_box)
         self.add_fixed_in_frame_mobjects(curv_formula)
         self.play(FadeIn(curv_formula))
-        self.play(Create(curv_box))
         self.next_slide()
 
 
         self.play(
-            FadeOut(textCurv), FadeOut(curv_formula),
-            FadeOut(curv_box)
+            FadeOut(textCurv), FadeOut(curv_formula), FadeOut(curv_box),
+             run_time=0.5
         )
         self.next_slide()
 
@@ -357,22 +356,25 @@ class slide8b(ThreeDSlide):
         # COVARIANT DERIVATIVE: ∇ = d + ω
         # =====================================================================
         textCovDeriv = Tex(
-            r"The covariant derivative of a section $\psi$ in direction $X$:",
+            r"$\bullet$The covariant derivative of a section $\psi$ in direction $X$:",
             font_size=24,
         ).next_to(omega_formula, DOWN, aligned_edge=LEFT, buff=0.35)
         self.add_fixed_in_frame_mobjects(textCovDeriv)
         self.play(FadeIn(textCovDeriv))
 
         nabla_formula = MathTex(
-            r"\nabla_X \psi \;=\;\underbrace{d_X \psi}_{\text{acts on coordinates}}\;+\; \underbrace{\omega(X)\,\psi}_{\text{acts on the frame}}",
+            r"\nabla_X \psi \;=\;\underbrace{d_X \psi}_{\text{variation of coefficients}}\;+\; \underbrace{\omega(X)\,\psi}_{\text{variation of frame}}",
             font_size=26,
         ).next_to(textCovDeriv, DOWN, aligned_edge=LEFT, buff=0.25)
         nabla_box = SurroundingRectangle(nabla_formula, color=YELLOW, buff=0.15)
         self.add_fixed_in_frame_mobjects(nabla_formula)
         self.add_fixed_in_frame_mobjects(nabla_box)
         self.play(FadeIn(nabla_formula))
-        self.play(Create(nabla_box))
         self.wait(1)
+        self.next_slide()
+        textBundleValuedForms = Tex(r" $\bullet$ Bundle-valued k-forms: $\Omega^k(\mathcal{M}, E) = \Omega^k(\mathcal{M}) \otimes E$", font_size=24).next_to(nabla_formula, DOWN, aligned_edge=LEFT, buff=0.35)
+        self.add_fixed_in_frame_mobjects(textBundleValuedForms)
+        self.play(FadeIn(textBundleValuedForms))
         self.next_slide()
 
         # =====================================================================
@@ -387,7 +389,7 @@ class slide8b(ThreeDSlide):
             FadeOut(visited_arrows), FadeOut(fibersCurve),
             FadeOut(curve), FadeOut(dot_start), FadeOut(dot_end),
             FadeOut(label_gamma), FadeOut(surface), FadeOut(label_M),
-            FadeOut(textConn2), FadeOut(title),
+            FadeOut(textConn2), FadeOut(title),FadeOut(textBundleValuedForms)
         )
         self.next_slide()
         

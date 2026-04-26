@@ -1,6 +1,7 @@
 
 from manim import *
 from manim_slides import Slide
+from utils.preamble import *
 
 
 class slide4(Slide):

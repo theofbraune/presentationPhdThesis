@@ -13,11 +13,13 @@ class slide5(Slide):
         imageGerman = ImageMobject("figures/differentialFormGerman.png").scale(0.7).next_to(title_text,2*DOWN,aligned_edge=LEFT)
         self.play(FadeIn(imageGerman))
         imageComputerGuy = ImageMobject("figures/computer-guy.jpg").scale(0.7).to_edge(RIGHT).shift(DOWN)
-        self.play(FadeIn(imageComputerGuy))
+        textSymb = Tex(r" Symbolic Image ", font_size=18, color=YELLOW).next_to(imageComputerGuy,0.5*DOWN)
+        self.play(FadeIn(imageComputerGuy), FadeIn(textSymb))
+        
         self.wait()
         self.next_slide()
         imageEnglish = ImageMobject("figures/differentialFormEnglish.png").scale(0.7).next_to(title_text,2*DOWN,aligned_edge=LEFT)
-        self.play(FadeOut(imageComputerGuy), FadeOut(imageGerman), FadeIn(imageEnglish))
+        self.play(FadeOut(imageComputerGuy),FadeOut(textSymb), FadeOut(imageGerman), FadeIn(imageEnglish))
         self.wait()
         self.next_slide()
 

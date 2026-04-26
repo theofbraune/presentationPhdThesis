@@ -118,6 +118,12 @@ class slidePPF(Slide):
         
         HEIGHTIm = 4.5
         POS = ORIGIN + 3**RIGHT
+        imageFirst = ImageMobject("figures/renderParallelTransport/croppedOut/output_0001.png")
+        imageFirst.height = HEIGHTIm
+        imageFirst.move_to(POS)
+        self.play(FadeIn(imageFirst))
+        self.wait()
+        self.next_slide()
         
         videoParallelTransport = play_video_loop(
             self,
@@ -139,6 +145,12 @@ class slidePPF(Slide):
         self.play(FadeIn(text2))
         self.wait(2)
         self.next_slide()
+        imageSecond = ImageMobject("figures/renderTransportFrame/croppedOut/output_0001.png")
+        imageSecond.height = HEIGHTIm
+        imageSecond.move_to(POS)
+        self.play(FadeIn(imageSecond))
+        self.wait()
+        self.next_slide()
 
         videoParallelTransport2 = play_video_loop(
             self,
@@ -150,21 +162,31 @@ class slidePPF(Slide):
             fade_out_time=0.0,
             persist=True,
         )
-        self.remove(videoParallelTransport)  # <-- remove the first video
+        self.remove(videoParallelTransport) 
+        self.remove(imageFirst) # <-- remove the first video
         self.wait()
         self.next_slide()
         imageParallelTransport = ImageMobject("figures/discreteFormsAndCurvature/parallelTransportPPF.png")
         imageParallelTransport.height = HEIGHTIm
         imageParallelTransport.move_to(POS)
         self.play(FadeIn(imageParallelTransport))
-        self.remove(videoParallelTransport2)  # <-- remove the second video
+        self.remove(videoParallelTransport2) 
+        self.remove(imageSecond) # <-- remove the second video
         self.wait()
         self.next_slide()
+
+        imageParallelTransport1 = ImageMobject("figures/discreteFormsAndCurvature/parallelTransportPPF1.png")
+        imageParallelTransport1.height = HEIGHTIm
+        imageParallelTransport1.move_to(POS)
+        self.play(FadeOut(imageParallelTransport), FadeIn(imageParallelTransport1), run_time=1.0)
+        self.wait()
+        self.next_slide()
+
         imageParallelTransport2 = ImageMobject("figures/discreteFormsAndCurvature/parallelTransportPPF2.png")
         imageParallelTransport2.height = HEIGHTIm
         imageParallelTransport2.move_to(POS)
         # self.play(Transform(imageParallelTransport, imageParallelTransport2), run_time=1.0)
-        self.play(FadeOut(imageParallelTransport), FadeIn(imageParallelTransport2), run_time=1.0)
+        self.play(FadeOut(imageParallelTransport1), FadeIn(imageParallelTransport2), run_time=1.0)
         self.next_slide()   
 
         imageParallelTransport3 = ImageMobject("figures/discreteFormsAndCurvature/parallelTransportPPF3.png")
@@ -227,7 +249,7 @@ class slidePPF(Slide):
             font_size=24,
         ).next_to(title, DOWN, aligned_edge=LEFT, buff=0.4).set_max_width(5.5)
         text_retract2 = Tex(
-            r"For every $p \in \sigma$, draw the retraction path "
+            r"For every $p \in \sigma$, trace the retraction path "
             r"$\gamma_p \colon p \to p_0$.", font_size=24,
         ).next_to(text_retract, DOWN, aligned_edge=LEFT, buff=0.3).set_max_width(5.5)
         self.play(FadeIn(text_retract))

@@ -46,7 +46,7 @@ class slideSummary(Slide):
             ),
             bullet(
                 r"Results hold for simplicial complexes "
-                r"and extend to general cell complexes.",
+                r"and most results extend to general cell complexes.",
                 START_Y - 3 * SPACING,
             ),
             bullet(

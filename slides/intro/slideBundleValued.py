@@ -11,7 +11,7 @@ class BundleValuedFormsIntro(Slide):
         self.play(FadeIn(title))
         self.next_slide()
 
-        textElasticBody = Tex(r" Consider the following elastic body:", font_size=24).next_to(title, DOWN, buff=0.5, aligned_edge=LEFT)
+        textElasticBody = Tex(r"$\bullet$ Consider the following elastic body:", font_size=24).next_to(title, DOWN, buff=0.5, aligned_edge=LEFT)
 
         self.play(FadeIn(textElasticBody))
         self.next_slide()
@@ -46,7 +46,7 @@ class BundleValuedFormsIntro(Slide):
         self.wait()
         self.next_slide()
 
-        textForceOnStencil = Tex(r"What is the force attacking on the stencil?", font_size=24).next_to(textElasticBody, DOWN, buff=0.5, aligned_edge=LEFT)
+        textForceOnStencil = Tex(r"$\bullet$ What is the force attacking on the stencil?", font_size=24).next_to(textElasticBody, DOWN, buff=0.5, aligned_edge=LEFT)
         imageStencil = ImageMobject("figures/illustrateStress/stencilCropped.png")
         imageStencil.height = height 
         imageStencil.move_to(position)
@@ -72,7 +72,7 @@ class BundleValuedFormsIntro(Slide):
         self.next_slide()
         self.wait()
         textStressTensor = Tex(
-            r"The \textit{stress tensor} $\sigma$ maps surface normals "
+            r"$\bullet$ The \textit{stress tensor} $\sigma$ maps surface normals "
             r"to traction forces.",
             font_size=24,
         ).next_to(textForceOnStencil, DOWN, buff=0.5, aligned_edge=LEFT)
@@ -85,7 +85,7 @@ class BundleValuedFormsIntro(Slide):
         self.next_slide()
         self.wait()
 
-        textStressBundleValued = Tex(r"Stress can be viewed as a vector-valued 2-form [Kanso et al. 2007]", font_size=24).next_to(textStressTensor2, DOWN, buff=0.5, aligned_edge=LEFT)
+        textStressBundleValued = Tex(r"$\bullet$ Stress can be viewed as a vector-valued 2-form [Kanso et al. 2007]", font_size=24).next_to(textStressTensor2, DOWN, buff=0.5, aligned_edge=LEFT)
         self.play(FadeIn(textStressBundleValued))
         self.next_slide()
         self.wait()

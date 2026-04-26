@@ -98,6 +98,8 @@ class slideDiscreteBundle(Slide):
         imageBundleSmooth.set_height(heightImage)
         imageBundleSmooth.move_to(position)
         self.play(Transform(imageBaseManifold, imageBundleSmooth), run_time=1.0)
+        self.wait()
+        self.next_slide()
 
         # =====================================================================
         # BEAT 2 — fade out bundle, tessellate into triangles
@@ -107,6 +109,8 @@ class slideDiscreteBundle(Slide):
             font_size=24,
         ).next_to(textMesh, 2*DOWN, aligned_edge=LEFT, buff=0.35)
         self.play(FadeIn(textDiscrete))
+        self.wait()
+        self.next_slide()
         imageDiscreteManifold = ImageMobject("figures/discreteFormsAndCurvature/DiscreteManifoldWithBundle.png")
         imageDiscreteManifold.set_height(heightImage)
         imageDiscreteManifold.move_to(position)

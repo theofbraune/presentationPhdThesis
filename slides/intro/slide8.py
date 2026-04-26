@@ -123,7 +123,7 @@ class slide8(ThreeDSlide):
         self.play(FadeIn(title))
         self.next_slide()
         bundle_caption = Tex(
-            r"A vector space (the \textit{fiber} $E_p$) "
+            r"$\bullet$ A vector space (the \textit{fiber} $E_p$) "
             r"attached to each point of $\mathcal{M}$.",
             font_size=24,
         ).next_to(title, 2*DOWN, aligned_edge=LEFT, buff=0.5)
@@ -183,7 +183,7 @@ class slide8(ThreeDSlide):
         # STEP 3 — section as arrows in the fiber planes
         # =====================================================================
         section_caption = Tex(
-            r"A \textit{section} $\psi$ chooses one vector "
+            r"$\bullet$A \textit{section} $\psi$ chooses one vector "
             r"$\psi(p)\in E_p$ per point.",
             font_size=24,
         ).next_to(bundle_caption, 2*DOWN, aligned_edge=LEFT, buff=0.3)
@@ -222,15 +222,17 @@ class slide8(ThreeDSlide):
         # CONNECTION INTRO TEXT
         # =====================================================================
         textConnection = Tex(
-            r"To compare vectors in different fibers, "
+            r"$\bullet$ To compare vectors in different fibers, "
             r"we need a \textit{connection} $\nabla$.",
             font_size=24,
         ).next_to(section_caption, 2*DOWN, aligned_edge=LEFT, buff=0.3)
         self.add_fixed_in_frame_mobjects(textConnection)
         self.play(FadeIn(textConnection))
+        self.wait()
+        self.next_slide()
 
         textConn2 = Tex(
-            r"A connection assigns "
+            r"$\bullet$ A connection assigns "
             r"$\mathcal{R}^\nabla_{\gamma,t} \colon "
             r"E_{\gamma(0)} \to E_{\gamma(t)}$ to each curve $\gamma$.",
             font_size=24,
@@ -431,10 +433,7 @@ class slide8(ThreeDSlide):
         
        
         # now zoom in to the manifold and 2 nearby points, say that there, the infinitesimal change is what we call covariant derivative
-
-
         # self.next_slide()
-
         # # step 8: final caption
         # mapping_caption = Tex(
         #     r"The connection transports $\psi(\gamma(0))$ "

@@ -35,12 +35,20 @@ class slideDiscreteLeviCivita(Slide):
         self.play(FadeIn(textLCPolyhedral2), FadeOut(imageBunny))
         self.wait()
         self.next_slide()
+        imageFirst = ImageMobject("figures/renderHinge/outCropped/output_0001.png")
+        imageFirst.height = 3.5
+        imageFirst.position = ORIGIN
+        self.play(FadeIn(imageFirst))
+        self.wait()
+        self.next_slide()
+
 
         # --- hinge video ---
+        self.remove(imageFirst)
         my_video = play_video_loop(
             self,
             frame_dir="figures/renderHinge/outCropped/",
-            position=RIGHT + DOWN * 0.5,
+            position=ORIGIN,
             height=3.5,
             fps=20,
             fade_in_time=0.5,

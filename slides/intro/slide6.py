@@ -18,7 +18,7 @@ class slide6(Slide):
         self.next_slide()
 
         text_question = Tex(
-            r"How do we extend $d$ to discrete forms?",
+            r"$\bullet$ How do we extend $d$ to discrete forms?",
             font_size=25,
         ).next_to(title_text, 2 * DOWN, aligned_edge=LEFT)
         self.play(FadeIn(text_question))
@@ -183,7 +183,7 @@ class slide6(Slide):
         ).next_to(stokes_def, 2 * DOWN, aligned_edge=LEFT)
 
         bullet_d_text = Tex(
-            r"\textbf{Discrete } $d$\textbf{:} signed sum on the boundary.",
+            r"$\bullet$ \textbf{Discrete } $d$\textbf{:} signed sum on the boundary.",
             font_size=24,
         ).next_to(bullet_d, DOWN, aligned_edge=LEFT)
 
@@ -209,7 +209,7 @@ class slide6(Slide):
 
         # Now show the cancellation: the shared edges fade out
         bullet_cancel = Tex(
-            r"\textbf{Shared edges cancel} when faces are glued.",
+            r"$\bullet$ \textbf{Shared edges cancel} when faces are glued.",
             font_size=24,
         ).next_to(bullet_d_text, 1.5 * DOWN, aligned_edge=LEFT)
 

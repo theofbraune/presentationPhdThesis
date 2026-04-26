@@ -60,8 +60,12 @@ class slideAlgebraicBianchiIssue(Slide):
         )
         self.next_slide()
 
-        divider = Line(UP * 3.2, DOWN * 3.5, color=GRAY, stroke_width=1.0
-                       ).move_to(ORIGIN)
+        divider = Line(
+            start=UP * 3.2, 
+            end=DOWN * 1.8, 
+            color=GRAY, 
+            stroke_width=1.0
+        )
         self.play(Create(divider))
 
         # ── LEFT: combinatorial ───────────────────────────────────────────────
@@ -72,7 +76,7 @@ class slideAlgebraicBianchiIssue(Slide):
         self.play(FadeIn(left_title))
 
         text_l1 = Tex(r"We have:", font_size=21,
-                      ).next_to(left_title, DOWN, aligned_edge=LEFT, buff=0.3)
+                      ).next_to(left_title, 2*DOWN, aligned_edge=LEFT, buff=0.3)
         mathTexCurv = MathTex(
             r"\mathfrak{d}^\nabla\mathfrak{d}^\nabla\alpha"
             r"([v_0,v_1,v_2,v_3],v_0) =",
@@ -120,7 +124,7 @@ class slideAlgebraicBianchiIssue(Slide):
             r"$\mathfrak{d}^\nabla$ at corner $v_0$: "
             r"converges at $\mathcal{O}(h^{\ell+2})$.",
             font_size=21,
-        ).next_to(right_title, DOWN, aligned_edge=LEFT, buff=0.3).set_max_width(5.6)
+        ).next_to(right_title, 2*DOWN, aligned_edge=LEFT, buff=0.3).set_max_width(5.6)
         self.play(FadeIn(text_r1))
         self.next_slide()
 

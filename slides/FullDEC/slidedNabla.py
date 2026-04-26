@@ -15,8 +15,12 @@ class slideAlgebraicBianchiFix(Slide):
         self.next_slide()
 
         # ── divider ───────────────────────────────────────────────────────────
-        divider = Line(UP * 3.2, DOWN * 1.0, color=GRAY, stroke_width=1.0
-                       ).move_to(ORIGIN)
+        divider = Line(
+            start=UP * 3.2, 
+            end=DOWN * 1.8, 
+            color=GRAY, 
+            stroke_width=1.0
+        )
         self.play(Create(divider))
 
         # =====================================================================
@@ -47,8 +51,8 @@ class slideAlgebraicBianchiFix(Slide):
         self.next_slide()
 
         text_l2 = Tex(
-            r"Explicitly: symmetrize over all $(\ell+2)!$ permutations "
-            r"of the vertices, transport each estimate to $v_0$.",
+            r"Explicitly: symmetrize over all permutations "
+            r"of the vertices,\\ transport each estimate to $v_0$.",
             font_size=20,
         ).next_to(dnabla_def, DOWN, aligned_edge=LEFT, buff=0.25).set_max_width(5.6)
         self.play(FadeIn(text_l2))
@@ -122,7 +126,7 @@ class slideAlgebraicBianchiFix(Slide):
 
         fix_label = Tex(
             r"Both fixes are two sides of the same coin: "
-            r"$\mathrm{Alt}^\nabla$ \textbf{=} center-of-mass PPF evaluation.",
+            r"$\mathrm{Alt}^\nabla$ $\Leftrightarrow$ center-of-mass PPF evaluation.",
             font_size=27, color=YELLOW,
         ).next_to(fix_line, DOWN, buff=0.2).set_max_width(10.0)
         fix_label.shift(DOWN * 0.5)

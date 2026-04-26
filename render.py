@@ -43,31 +43,11 @@ from slides.FullDEC.slideAlgebraicBianchi import slideAlgebraicBianchiIssue
 from slides.FullDEC.slidedNabla import slideAlgebraicBianchiFix
 from slides.FullDEC.slideDiscreteAlgebraicBianchi import slideDiscreteAlgebraicBianchiFixed
 from slides.FullDEC.slideWrapUpAndSummary import slideSummary
+from slides.FullDEC.slideWhatComesNext import slideFutureWork
+from slides.FullDEC.slideThanks import slideThanks
 
 
-"""
-# from slides.slideDiscreteTorsion3 import slideDiscreteTorsion3
 
-# from slides.teaserBundleValued import teaser_bundle_valued
-# from slides.slide9 import slide9
-# from slides.slide_connection import slide_connection
-# from slides.slide10 import slide10
-# from slides.slide11 import ExteriorDerivativeSlides
-# from slides.slide12 import slide12
-# from slides.TransitionBundleValued import TransitionBundleValued
-# from slides.slide13 import slide13
-# from slides.slide14 import slide14
-# from slides.slide15 import slide15
-# from slides.slide16 import slide16
-# from slides.slideDiscretization import slide16AndAHalf
-# from slides.slideDiscretization2 import slide16AndThreeQuarter
-# from slides.slide17 import slide17
-# from slides.slide18 import slide18
-# from slides.slideSummary import SummarySlide
-# from slides.slide19 import slide19
-# from slides.slide20 import slide20
-# ... (all other imports)
-"""
 # Define the master presentation class. 
 class FullPresentation(ThreeDSlide): 
     
@@ -105,6 +85,8 @@ class FullPresentation(ThreeDSlide):
         slideAlgebraicBianchiFix,
         slideDiscreteAlgebraicBianchiFixed,
         slideSummary,
+        slideFutureWork,
+        slideThanks
         
 
         # ... all other classes in order ...

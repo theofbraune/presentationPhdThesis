@@ -46,6 +46,14 @@ class slideDiscreteAlgebraicBianchiFixed(Slide):
         ).next_to(bianchi_discrete, DOWN, aligned_edge=LEFT, buff=0.35)
         self.play(FadeIn(text2))
         self.next_slide()
+        imageMathematica = ImageMobject("figures/odd_and_even_permutations.jpg")
+        imageMathematica.height = 4.0
+        imageMathematica.move_to(ORIGIN+DOWN)
+        self.play(FadeIn(imageMathematica))
+        self.wait()
+        self.next_slide()
+        self.play(FadeOut(imageMathematica))
+
 
         # =====================================================================
         # BEAT 2 — convergence of the error
