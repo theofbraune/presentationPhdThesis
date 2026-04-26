@@ -18,6 +18,7 @@ from slides.intro.slide7 import slide7
 from slides.intro.slide8 import slide8
 from slides.intro.slide8b import slide8b
 from slides.intro.slideBundleValued import BundleValuedFormsIntro
+from slides.intro.slideBundleVal2 import BundleValuedFormsIntro2
 from slides.intro.extDerSlide import ExteriorDerivativeSlides
 
 # for the discrete torsion part 
@@ -32,6 +33,17 @@ from slides.discreteTorsion.slideControlTorsionCont2 import slideControllingTors
 
 # for the full DEC part 
 from slides.FullDEC.slideFullDECCover import FullDECCover
+from slides.FullDEC.slideDiscreteWelcome import slideDiscreteBundle
+from slides.FullDEC.slideDiscreteBundleValuedForms import slideDiscreteBundleValuedForm
+from slides.FullDEC.slideDiscreteFrakd import slideDiscreteFrakd
+from slides.FullDEC.slideIssueFrakd import slideIssueFrakD
+from slides.FullDEC.slidePPF import slidePPF
+from slides.FullDEC.slideFrakDfirstStep import slideFrakDfixed
+from slides.FullDEC.slideAlgebraicBianchi import slideAlgebraicBianchiIssue
+from slides.FullDEC.slidedNabla import slideAlgebraicBianchiFix
+from slides.FullDEC.slideDiscreteAlgebraicBianchi import slideDiscreteAlgebraicBianchiFixed
+from slides.FullDEC.slideWrapUpAndSummary import slideSummary
+
 
 """
 # from slides.slideDiscreteTorsion3 import slideDiscreteTorsion3
@@ -83,19 +95,17 @@ class FullPresentation(ThreeDSlide):
         slideControllingTorsionCurvatureCont,
         slideControllingTorsionCurvatureCont2,
         FullDECCover,
-        # slide12,
-        # TransitionBundleValued,
-        # slide13,
-        # slide14,
-        # slide15,
-        # slide16,
-        # slide16AndAHalf,
-        # slide16AndThreeQuarter,
-        # slide17,
-        # slide18,
-        # SummarySlide,
-        # slide19,
-        # slide20,
+        slideDiscreteBundle,
+        slideDiscreteBundleValuedForm,
+        slideDiscreteFrakd,
+        slideIssueFrakD,
+        slidePPF,
+        slideFrakDfixed,
+        slideAlgebraicBianchiIssue,
+        slideAlgebraicBianchiFix,
+        slideDiscreteAlgebraicBianchiFixed,
+        slideSummary,
+        
 
         # ... all other classes in order ...
     ]

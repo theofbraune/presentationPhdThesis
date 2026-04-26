@@ -160,3 +160,18 @@ class slideFrakDfixed(Slide):
         )
         self.wait()
         self.next_slide()
+        # let everything disappear 
+
+        self.remove(*self.mobjects)
+
+        done_text = Tex(
+            r"Are we done?", font_size=48,
+        ).move_to(UP * 0.5)
+        self.play(FadeIn(done_text))
+        self.next_slide()
+
+        not_quite = Tex(
+            r"Not quite\ldots", font_size=48, color=RED,
+        ).next_to(done_text, DOWN, buff=0.5)
+        self.play(FadeIn(not_quite))
+        self.next_slide()

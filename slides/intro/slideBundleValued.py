@@ -7,7 +7,7 @@ from utils.videoLoop import *
 class BundleValuedFormsIntro(Slide):
     def construct(self):
 
-        title = Tex(r"Bundle-Valued Differential Forms", font_size=32).to_corner(UL)
+        title = Tex(r"Vector-Valued Differential Forms", font_size=32).to_corner(UL)
         self.play(FadeIn(title))
         self.next_slide()
 

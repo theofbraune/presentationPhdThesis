@@ -85,7 +85,7 @@ class slideDiscreteBundle(Slide):
         ).next_to(title, DOWN, aligned_edge=LEFT, buff=0.4)
         self.play(FadeIn(textMesh))
 
-        heightImage = 4
+        heightImage = 3.5
         position = ORIGIN + 2.5*RIGHT + UP * 0.5
         imageBaseManifold = ImageMobject("figures/discreteFormsAndCurvature/baseManifold.png" )
         imageBaseManifold.set_height(heightImage)

@@ -122,7 +122,7 @@ class slide8b(ThreeDSlide):
             lambda u, v: surf_point(u, v),
             u_range=[-5, 5],
             v_range=[-5, 5],
-            resolution=(5, 5),
+            resolution=(20, 20),
             fill_color="#1B4D5C",
             fill_opacity=0.85,
             stroke_color="#2A7A8C",

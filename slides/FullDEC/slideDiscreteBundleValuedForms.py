@@ -18,7 +18,7 @@ class slideDiscreteBundleValuedForm(Slide):
         IMG_X       = 2.8    # center x of image column
 
         heightImage = 4
-        position = ORIGIN + 2.5*RIGHT + UP * 0.5
+        position = ORIGIN + 3.5*RIGHT + UP * 0.5
 
         def left_tex(text, font_size=23):
             t = Tex(text, font_size=font_size)
@@ -136,60 +136,41 @@ class slideDiscreteBundleValuedForm(Slide):
 
         self.play(FadeIn(label_Curv), FadeIn(arrow_Curv), FadeIn(val_Curv))
         self.next_slide()
-
         label_discreteCurv = Tex(
             r"\textit{Discrete curvature:}",
             font_size=23,
             color=WHITE,
         ).next_to(arrow_Curv, 1.5*DOWN, aligned_edge=LEFT, buff=0.4)
         self.play(FadeIn(label_discreteCurv))
-        imageDiscreteCurv1 = ImageMobject("figures/discreteFormsAndCurvature/discreteCurv/discreteCurvature1.png" )
-        self.next_slide()
-        imageDiscreteCurv1.set_height(heightImage)
-        imageDiscreteCurv1.move_to(position)
-        self.play(FadeIn(imageDiscreteCurv1), run_time=1.0)
-        self.next_slide()
-        imageDiscreteCurv2 = ImageMobject("figures/discreteFormsAndCurvature/discreteCurv/discreteCurvature2.png" )
-        imageDiscreteCurv2.set_height(heightImage)
-        imageDiscreteCurv2.move_to(position)
-        self.play(Transform(imageDiscreteCurv1, imageDiscreteCurv2), run_time=1.0)
-        self.next_slide()   
-
-        imageDiscreteCurv3 = ImageMobject("figures/discreteFormsAndCurvature/discreteCurv/discreteCurvature3.png" )
-        imageDiscreteCurv3.set_height(heightImage)
-        imageDiscreteCurv3.move_to(position)
-        self.play(Transform(imageDiscreteCurv1, imageDiscreteCurv3), run_time=1.0)
         self.next_slide()
 
-        imageDiscreteCurv4 = ImageMobject("figures/discreteFormsAndCurvature/discreteCurv/discreteCurvature4.png" )
-        imageDiscreteCurv4.set_height(heightImage)
-        imageDiscreteCurv4.move_to(position)
-        self.play(Transform(imageDiscreteCurv1, imageDiscreteCurv4), run_time=1.0)
+        # ── fade out whatever image was on screen from the previous section ──
+        self.play(FadeOut(imageBase))
+
+        # ── single variable, swap through all 8 frames ───────────────────────
+        base_path = "figures/discreteFormsAndCurvature/discreteCurv/discreteCurvature"
+
+        current_img = ImageMobject(f"{base_path}1.png")
+        current_img.set_height(heightImage)
+        current_img.move_to(position)
+        self.play(FadeIn(current_img), run_time=0.8)
         self.next_slide()
 
-        imageDiscreteCurv5 = ImageMobject("figures/discreteFormsAndCurvature/discreteCurv/discreteCurvature5.png" )
-        imageDiscreteCurv5.set_height(heightImage)
-        imageDiscreteCurv5.move_to(position)
-        self.play(Transform(imageDiscreteCurv1, imageDiscreteCurv5), run_time=1.0)
-        self.next_slide()
+        for i in range(2, 9):
+            next_img = ImageMobject(f"{base_path}{i}.png")
+            next_img.set_height(heightImage)
+            next_img.move_to(position)
+            # self.play(
+            #     FadeOut(current_img),
+            #     FadeIn(next_img),
+            #     run_time=0.8,
+            # )
+            self.add(next_img)
+            current_img = next_img
+            self.wait()
+            self.next_slide()
 
-        imageDiscreteCurv6 = ImageMobject("figures/discreteFormsAndCurvature/discreteCurv/discreteCurvature6.png" )
-        imageDiscreteCurv6.set_height(heightImage)
-        imageDiscreteCurv6.move_to(position)
-        self.play(Transform(imageDiscreteCurv1, imageDiscreteCurv6), run_time=1.0)
-        self.next_slide()
-
-        imageDiscreteCurv7 = ImageMobject("figures/discreteFormsAndCurvature/discreteCurv/discreteCurvature7.png" )
-        imageDiscreteCurv7.set_height(heightImage)
-        imageDiscreteCurv7.move_to(position)
-        self.play(Transform(imageDiscreteCurv1, imageDiscreteCurv7), run_time=1.0)
-        self.next_slide()
-
-        imageDiscreteCurv8 = ImageMobject("figures/discreteFormsAndCurvature/discreteCurv/discreteCurvature8.png" )
-        imageDiscreteCurv8.set_height(heightImage)
-        imageDiscreteCurv8.move_to(position)
-        self.play(Transform(imageDiscreteCurv1, imageDiscreteCurv8), run_time=1.0)
-        self.next_slide()
+        # current_img is now discreteCurvature8, ready for the next beat
 
         arrow_discreteCurv = Tex(r"$\rightarrow$", font_size=23).next_to(label_discreteCurv, DOWN, aligned_edge=LEFT, buff=0.15)
         val_discreteCurv = Tex(r"Given evaluation $v_0$ and cut $v_2$ fibers, measure discrete path-dependance ", font_size=23, color=YELLOW)
@@ -216,7 +197,7 @@ class slideDiscreteBundleValuedForm(Slide):
         textAbusive = left_tex(
             r"\textit{Note:} a continuous endomorphism-valued form, "
             r"but discrete — a homomorphism between fibers."
-        ).next_to(arrow_discreteCurv, 1.5*DOWN, aligned_edge=LEFT, buff=0.3)
+        ).next_to(arrow_discreteCurv, 2.5*DOWN, aligned_edge=LEFT, buff=0.3)
         self.play(FadeIn(textAbusive))
         self.wait()
         self.next_slide()

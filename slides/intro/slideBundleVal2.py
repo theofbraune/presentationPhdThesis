@@ -29,5 +29,5 @@ class BundleValuedFormsIntro2(Slide):
         # imageStress.move_to(position2)
         self.play(FadeIn(imageFlux), FadeIn(imageStress))
         
-        # self.next_slide()
-        # self.wait()
+        self.next_slide()
+        self.wait()

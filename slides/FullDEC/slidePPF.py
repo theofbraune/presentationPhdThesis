@@ -2,6 +2,7 @@ from manim import *
 from manim_slides import Slide, ThreeDSlide
 import numpy as np
 from utils.preamble import *
+from utils.videoLoop import *
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -114,35 +115,96 @@ class slidePPF(Slide):
         ).next_to(title, DOWN, aligned_edge=LEFT, buff=0.4)
         self.play(FadeIn(text1))
         self.next_slide()
+        
+        HEIGHTIm = 4.5
+        POS = ORIGIN + 3**RIGHT
+        
+        videoParallelTransport = play_video_loop(
+            self,
+            frame_dir="figures/renderParallelTransport/croppedOut/",
+            position=POS,   # <-- sit exactly over imageWithConn
+            height=HEIGHTIm,           # <-- match exact height
+            fps=3,
+            fade_in_time=0.5,
+            fade_out_time=0.0,
+            persist=True,
+        )
 
+        
         text2 = Tex(
             r"Fix a source point $p_0$. "
             r"Parallel-transport the frame at $p_0$ to nearby points.",
             font_size=24,
         ).next_to(text1, DOWN, aligned_edge=LEFT, buff=0.3)
         self.play(FadeIn(text2))
+        self.wait(2)
         self.next_slide()
 
+        videoParallelTransport2 = play_video_loop(
+            self,
+            frame_dir="figures/renderTransportFrame/croppedOut/",
+            position=POS,   # <-- sit exactly over imageWithConn
+            height=HEIGHTIm,           # <-- match exact height
+            fps=3,
+            fade_in_time=0.5,
+            fade_out_time=0.0,
+            persist=True,
+        )
+        self.remove(videoParallelTransport)  # <-- remove the first video
+        self.wait()
+        self.next_slide()
+        imageParallelTransport = ImageMobject("figures/discreteFormsAndCurvature/parallelTransportPPF.png")
+        imageParallelTransport.height = HEIGHTIm
+        imageParallelTransport.move_to(POS)
+        self.play(FadeIn(imageParallelTransport))
+        self.remove(videoParallelTransport2)  # <-- remove the second video
+        self.wait()
+        self.next_slide()
+        imageParallelTransport2 = ImageMobject("figures/discreteFormsAndCurvature/parallelTransportPPF2.png")
+        imageParallelTransport2.height = HEIGHTIm
+        imageParallelTransport2.move_to(POS)
+        # self.play(Transform(imageParallelTransport, imageParallelTransport2), run_time=1.0)
+        self.play(FadeOut(imageParallelTransport), FadeIn(imageParallelTransport2), run_time=1.0)
+        self.next_slide()   
+
+        imageParallelTransport3 = ImageMobject("figures/discreteFormsAndCurvature/parallelTransportPPF3.png")
+        imageParallelTransport3.height = HEIGHTIm
+        imageParallelTransport3.move_to(POS)
+        # self.play(Transform(imageParallelTransport, imageParallelTransport3), run_time=1.0)
+        self.play(FadeOut(imageParallelTransport2), FadeIn(imageParallelTransport3), run_time=1.0)
+        self.next_slide()   
+
+        imageParallelTransport4 = ImageMobject("figures/discreteFormsAndCurvature/parallelTransportPPF4.png")
+        imageParallelTransport4.height = HEIGHTIm
+        imageParallelTransport4.move_to(POS)
+        # self.play(Transform(imageParallelTransport, imageParallelTransport4), run_time=1.0)
+        self.play(FadeOut(imageParallelTransport3), FadeIn(imageParallelTransport4), run_time=1.0)
+        self.next_slide()
+
+        self.wait()
+
         text3 = Tex(
-            r"At $p_0$: $\mathcal{R}_{p_0, p_0} = \mathrm{Id}$",
+            r"Along $\gamma$: $R = \mathrm{Id}$",
             font_size=24,
         ).next_to(text2, DOWN, aligned_edge=LEFT, buff=0.35)
         self.play(FadeIn(text3))
+        self.wait()
+        self.next_slide()
 
         arrow_down = Tex(r"$\Downarrow$", font_size=28
-                         ).next_to(text3, DOWN, aligned_edge=LEFT, buff=0.15)
+                         ).next_to(text3,  DOWN, aligned_edge=LEFT, buff=0.15)
         self.play(FadeIn(arrow_down))
 
         omega_zero = MathTex(
             r"\omega(p_0) \;=\; \log(\mathrm{Id}) \;=\; 0",
             font_size=30, color=YELLOW,
-        ).next_to(arrow_down, DOWN, aligned_edge=LEFT, buff=0.15)
+        ).next_to(arrow_down, 2*DOWN, aligned_edge=LEFT, buff=0.15)
         box_omega = SurroundingRectangle(omega_zero, color=YELLOW, buff=0.15)
         self.play(FadeIn(omega_zero), Create(box_omega))
         self.next_slide()
 
         text4 = Tex(
-            r"By continuity: $\omega = \mathcal{O}(h)$ throughout the simplex.",
+            r"By continuity: $\omega = \mathcal{O}(h)$.",
             font_size=24, color=YELLOW,
         ).next_to(omega_zero, DOWN, aligned_edge=LEFT, buff=0.3)
         self.play(FadeIn(text4))
@@ -156,16 +218,21 @@ class slidePPF(Slide):
             FadeOut(text1), FadeOut(text2), FadeOut(text3),
             FadeOut(arrow_down), FadeOut(omega_zero),
             FadeOut(box_omega), FadeOut(text4),
+            FadeOut(imageParallelTransport4)
         )
         self.next_slide()
 
         text_retract = Tex(
-            r"Given a simplex $\sigma$, pick a source $p_0$. "
-            r"For every $p \in \sigma$, draw the retraction path "
-            r"$\gamma_p \colon p \to p_0$.",
+            r"Given a simplicial region $\sigma$, pick a source $p_0$. ",
             font_size=24,
         ).next_to(title, DOWN, aligned_edge=LEFT, buff=0.4).set_max_width(5.5)
+        text_retract2 = Tex(
+            r"For every $p \in \sigma$, draw the retraction path "
+            r"$\gamma_p \colon p \to p_0$.", font_size=24,
+        ).next_to(text_retract, DOWN, aligned_edge=LEFT, buff=0.3).set_max_width(5.5)
         self.play(FadeIn(text_retract))
+        self.next_slide()
+        self.play(FadeIn(text_retract2))
 
         img_retraction = ImageMobject("figures/retraction.png")
         img_retraction.height = 4.2
@@ -177,7 +244,7 @@ class slidePPF(Slide):
             r"Parallel-transport the frame at $p_0$ "
             r"along each path $\gamma_p$.",
             font_size=24,
-        ).next_to(text_retract, DOWN, aligned_edge=LEFT, buff=0.3).set_max_width(5.5)
+        ).next_to(text_retract2, DOWN, aligned_edge=LEFT, buff=0.3).set_max_width(5.5)
         self.play(FadeIn(text_transport))
         self.next_slide()
 
@@ -193,7 +260,7 @@ class slidePPF(Slide):
         # =====================================================================
         text_vertex = Tex(
             r"$\bullet$ Source = vertex $v_0$: "
-            r"retraction paths go from boundary to $v_0$.",
+            r"retraction paths go to $v_0$.",
             font_size=22,
         ).next_to(text_name, DOWN, aligned_edge=LEFT, buff=0.3).set_max_width(5.5)
         self.play(FadeIn(text_vertex))
@@ -201,17 +268,17 @@ class slidePPF(Slide):
 
         text_bary = Tex(
             r"$\bullet$ Source = barycenter $c_\sigma$: "
-            r"retraction paths go from boundary to $c_\sigma$.",
+            r"retraction paths go to $c_\sigma$.",
             font_size=22,
         ).next_to(text_vertex, DOWN, aligned_edge=LEFT, buff=0.2).set_max_width(5.5)
         self.play(FadeIn(text_bary))
         self.next_slide()
-
-        text_why = Tex(
-            r"The choice of source determines the evaluation fiber "
-            r"of the discrete form.",
-            font_size=22, color=GRAY,
-        ).next_to(text_bary, DOWN, aligned_edge=LEFT, buff=0.2).set_max_width(5.5)
-        self.play(FadeIn(text_why))
+        text_important = Tex(r" The PPF yields a \textit{canonical}, \textit{geometric} choice of frame for discretization.", font_size=30, color=YELLOW).next_to(text_bary, 5*DOWN, aligned_edge=LEFT, buff=0.3).set_max_width(5.5)
+        surrRect = SurroundingRectangle(text_important, color=YELLOW, buff=0.15)
+        self.play(FadeIn(text_important), Create(surrRect))
         self.wait()
         self.next_slide()
+        
+
+        
+    

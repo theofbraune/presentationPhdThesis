@@ -20,7 +20,7 @@ class slideDiscreteFrakd(Slide):
         # =====================================================================
         text_b1 = Tex(
             r"Recall: scalar $d\alpha(\sigma)$ = signed sum over $\partial\sigma$.",
-            font_size=23,
+            font_size=24,
         ).next_to(title_text, DOWN, aligned_edge=LEFT, buff=0.4).set_max_width(5.0)
         self.play(FadeIn(text_b1))
 
@@ -94,7 +94,7 @@ class slideDiscreteFrakd(Slide):
 
         scalar_formula = MathTex(
             r"d\alpha(\sigma) \;=\; \sum_{i=0}^{2} (-1)^i\, \alpha(\sigma_i)",
-            font_size=22,
+            font_size=24,
         ).next_to(text_b1, DOWN, aligned_edge=LEFT, buff=0.3).set_max_width(5.0)
         self.play(FadeIn(scalar_formula))
         self.next_slide()
@@ -105,7 +105,7 @@ class slideDiscreteFrakd(Slide):
         text_b2 = Tex(
             r"Now $\alpha$ is \textit{vector-valued}: "
             r"values live in fibers $E_{v_i}$ over each vertex.",
-            font_size=22,
+            font_size=24,
         ).next_to(scalar_formula, DOWN, aligned_edge=LEFT, buff=0.25
                   ).set_max_width(5.0)
         self.play(FadeIn(text_b2))
@@ -150,7 +150,7 @@ class slideDiscreteFrakd(Slide):
         text_b3 = Tex(
             r"\textcolor{red}{Problem:} these vectors live in "
             r"\textit{different} fibers — cannot sum directly.",
-            font_size=22,
+            font_size=24,
         ).next_to(text_b2, DOWN, aligned_edge=LEFT, buff=0.25).set_max_width(5.0)
         self.play(FadeIn(text_b3))
 
@@ -166,7 +166,7 @@ class slideDiscreteFrakd(Slide):
         text_b4 = Tex(
             r"\textcolor{yellow}{Fix:} transport everything to $E_{v_0}$ "
             r"via $\mathcal{R}_{ij}$, then sum.",
-            font_size=22,
+            font_size=24,
         ).next_to(text_b3, DOWN, aligned_edge=LEFT, buff=0.25).set_max_width(5.0)
         self.play(FadeIn(text_b4))
         self.next_slide()
@@ -189,8 +189,8 @@ class slideDiscreteFrakd(Slide):
 
         # ── α formula on left ─────────────────────────────────────────────────
         text_alpha_intro = Tex(
-            r"For a bundle-valued $\ell$-form $\alpha$:",
-            font_size=22,
+            r"For a bundle-valued $\ell$-form $\alpha$, following Berwick-Evans et al.:",
+            font_size=24,
         ).next_to(title_text, DOWN, aligned_edge=LEFT, buff=0.5)
         self.play(FadeIn(text_alpha_intro))
 
@@ -220,7 +220,7 @@ class slideDiscreteFrakd(Slide):
         text_beta_intro = Tex(
             r"For an endomorphism-valued $\ell$-form $\beta$ "
             r"($\mathcal{R}_{ij}$ on both sides):",
-            font_size=26,
+            font_size=24,
         ).next_to(formula_alpha, 4 * DOWN, aligned_edge=LEFT, buff=0.45).set_max_width(5.8)
         self.play(FadeIn(text_beta_intro))
 
@@ -244,7 +244,7 @@ class slideDiscreteFrakd(Slide):
         caption = Tex(
             r"Same combinatorics as scalar DEC — "
             r"transport terms to a common fiber.",
-            font_size=21, color=YELLOW,
+            font_size=24, color=YELLOW,
         ).next_to(formula_beta, DOWN, aligned_edge=LEFT, buff=0.3).set_max_width(5.8)
         self.play(FadeIn(caption))
         self.next_slide()

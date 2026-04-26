@@ -115,23 +115,13 @@ class ExteriorDerivativeSlides(Slide):
         )
         self.next_slide()
 
-        # =====================================================================
-        # BEAT 3 — d^\nabla = d + ω∧, replace d with ∇
-        # =====================================================================
-        formula_covariant = MathTex(
-            r"d^{\nabla}\alpha(X,Y) \;=\; \nabla_X\,\alpha[Y] \;-\; \nabla_Y\,\alpha[X]",
-            font_size=30,
-        ).next_to(textVectorial, DOWN, buff=0.4).align_to(textVectorial, LEFT)
-        box_cov = SurroundingRectangle(formula_covariant, color=YELLOW, buff=0.15)
-
-        self.play(FadeIn(formula_covariant), Create(box_cov))
-        self.next_slide()
+        
 
         # explicitly show d^\nabla = d + ω∧
         formula_expand = MathTex(
             r"d^{\nabla}\alpha \;=\; d\alpha \;+\; \omega \wedge \alpha",
             font_size=28,
-        ).next_to(formula_covariant, DOWN, buff=0.3).align_to(formula_covariant, LEFT)
+        ).next_to(textVectorial, DOWN, buff=0.3).align_to(textVectorial, LEFT)
         expand_caption = Tex(
             r"$d$ acts on coordinates, $\omega\wedge$ acts on the frame.",
             font_size=22, color=YELLOW,
@@ -159,7 +149,6 @@ class ExteriorDerivativeSlides(Slide):
         self.play(
             FadeOut(caption_scalar), FadeOut(formula_scalar), FadeOut(box_scalar),
             FadeOut(textVectorial), FadeOut(frames),
-            FadeOut(formula_covariant), FadeOut(box_cov),
             FadeOut(formula_expand), FadeOut(expand_caption),
             FadeOut(dots), FadeOut(label_p),
             FadeOut(a_pq), FadeOut(a_pr),
